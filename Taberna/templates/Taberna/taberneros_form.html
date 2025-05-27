@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2 style="font-size: 1.75em; font-weight: bold; color: #c49b6b; margin-bottom: 1em;">
+    Agregar un nuevo Tabernero
+  </h2>
+  <p style="margin-bottom: 1.5em; color: #5b4a30;">
+    Llena los datos para agregar un nuevo tabernero a la lista de Lion's Pride Inn.
+  </p>
+
+  <form method="post" 
+        style="background-color: #6e5a36; padding: 1.5em; border-radius: 8px; max-width: 400px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <button type="submit" class="button-link taberneros" style="margin-top: 1em; width: 100%; font-weight: 700;">
+      Agregar Tabernero
+    </button>
+  </form>
+
+  <p style="margin-top: 2em;">
+    <a href="{% url 'Taberna:taberneros' %}" 
+       style="color: #c49b6b; text-decoration: none; font-weight: 600;"
+       onmouseover="this.style.textDecoration='underline';"
+       onmouseout="this.style.textDecoration='none';">
+       Volver a la lista de taberneros
+    </a>
+  </p>
+{% endblock %}

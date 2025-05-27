@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Lion's Pride Inn{% endblock %}
+
+{% block content %}
+<h2>¡Bienvenido a Lion's Pride Inn!</h2>
+<p>Descansa tus botas, aventurero, y sé bienvenido a la taberna más famosa de Elwynn Forest:</p>
+
+<div class="button-container">
+    <a href="{% url 'Taberna:taberneros' %}" class="button-link taberneros">
+        👨‍🍳 Ver Taberneros
+    </a>
+    <a href="{% url 'Taberna:clientes_frecuentes' %}" class="button-link clientes">
+        🧙‍♂️ Ver Clientes Frecuentes
+    </a>
+    <a href="{% url 'Taberna:productos' %}" class="button-link productos">
+        🍻 Ver Productos
+    </a>
+</div>
+{% endblock %}

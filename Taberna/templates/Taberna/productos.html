@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2 style="font-size: 1.75em; font-weight: bold; color: #c49b6b; margin-bottom: 1em;">
+    Nuestro Menú
+  </h2>
+  <p style="color: #5b4a30; margin-bottom: 1.5em;">
+    Aquí se muestran todas las delicias que sólo podás encontrar en Lion's Pride Inn, y que nadie prepara mejor que nosotros.
+  </p>
+
+  <ul style="list-style: none; padding: 0; margin-bottom: 2em;">
+  {% for producto in productos %}
+    <li style="background-color: #6e5a36; padding: 1em; border-radius: 8px; margin-bottom: 0.75em;">
+      <a href="{% url 'Taberna:detalle_productos' producto.id %}" 
+         style="color: #c49b6b; text-decoration: none; font-weight: 600;"
+         onmouseover="this.style.textDecoration='underline';"
+         onmouseout="this.style.textDecoration='none';">
+         {{ producto.nombre }} {{ producto.precio }} ({{ producto.stock }})
+      </a>
+    </li>
+  {% empty %}
+    <li style="color: #b9a46a;">No hay productos disponibles.</li>
+  {% endfor %}
+  </ul>
+
+  <div style="display: flex; flex-direction: column; gap: 1em; max-width: 300px; margin: 0 auto;">
+    <a href="{% url 'Taberna:productos_form' %}" 
+       class="button-link taberneros"
+       style="background-color: #a9733d; color: #1f2937; font-weight: 700; text-align: center;">
+       ➕ Agregar Productos
+    </a>
+
+    <a href="{% url 'Taberna:buscar_productos' %}" 
+       class="button-link taberneros"
+       style="background-color: #a9733d; color: white; font-weight: 700; text-align: center;">
+       🔍 Buscar Productos
+    </a>
+  </div>
+
+  <div style="margin-top: 2em; max-width: 300px;">
+        <a href="{% url 'Taberna:index' %}" 
+            style="padding: 1em; background-color: #a9733d; color: white; border: none; border-radius: 8px; text-align: center; text-decoration: none; font-weight: bold; display: inline-block;">
+            ⬅️ Volver
+        </a>
+    </div>
+{% endblock %}

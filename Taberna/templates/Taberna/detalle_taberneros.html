@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div style="background-color: #6e5a36; color: white; padding: 1.5em; border-radius: 8px; max-width: 500px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); margin: auto;">
+    <h2 style="font-size: 1.75em; font-weight: bold; color: #c49b6b; margin-bottom: 1em;">
+      🍺 {{ tabernero.nombre }} {{ tabernero.apellido }}
+    </h2>
+
+    <p style="margin-bottom: 0.5em;">
+      <strong style="color: #f1d27a;">🎂 Edad:</strong> {{ tabernero.edad }} años
+    </p>
+    <p style="margin-bottom: 0.5em;">
+      <strong style="color: #f1d27a;">⏳ Años de Servicio:</strong> {{ tabernero.edad|add:"-20" }} años
+    </p>
+    <p style="margin-bottom: 1.5em;">
+      <strong style="color: #f1d27a;">⭐ Especialidad:</strong>
+      {% if tabernero.edad > 50 %}
+        🧪 Maestro Cervecero
+      {% elif tabernero.edad > 30 %}
+        🍲 Chef Principal
+      {% else %}
+        🍷 Cantinero
+      {% endif %}
+    </p>
+
+    <h3 style="font-size: 1.25em; font-weight: 600; color: #c49b6b; margin-bottom: 1em;">
+      📖 Sobre el Tabernero
+    </h3>
+    <p style="margin-bottom: 1.5em;">
+      {% if tabernero.edad > 50 %}
+        Un veterano de la taberna, {{ tabernero.nombre }} ha mantenido felices a los clientes desde antes de la Guerra de la Legión.
+        Sus recetas familiares son leyenda en todo el reino.
+      {% elif tabernero.edad > 30 %}
+        {{ tabernero.nombre }} aporta un equilibrio perfecto entre experiencia e innovación a Lion's Pride Inn.
+        Su estofado es conocido por curar todos los males.
+      {% else %}
+        El más joven del equipo, {{ tabernero.nombre }} anima el ambiente con historias y canciones.
+      {% endif %}
+    </p>
+
+    <div class="button-container" style="max-width: 300px; margin: 0 auto;">
+      <a href="{% url 'Taberna:taberneros' %}" 
+         class="button-link taberneros"
+         style="width: 100%; font-weight: 700;">
+         ⬅️ Volver a los Taberneros
+      </a>
+    </div>
+  </div>
+{% endblock %}

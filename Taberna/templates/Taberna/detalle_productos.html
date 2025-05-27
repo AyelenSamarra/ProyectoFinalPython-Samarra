@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div style="background-color: #6e5a36; color: white; padding: 1.5em; border-radius: 8px; max-width: 500px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); margin: auto;">
+    <h2 style="font-size: 1.75em; font-weight: bold; color: #c49b6b; margin-bottom: 1em;">
+      🍽️ {{ producto.nombre }}
+    </h2>
+
+    <p style="margin-bottom: 0.5em;">
+      <strong style="color: #f1d27a;">💰 Precio:</strong> {{ producto.precio }} oro
+    </p>
+    <p style="margin-bottom: 0.5em;">
+      <strong style="color: #f1d27a;">📦 Stock Disponible:</strong> {{ producto.stock }}
+    </p>
+
+    <p style="margin-bottom: 1.5em;">
+      <strong style="color: #f1d27a;">📊 Estado de Disponibilidad:</strong>
+      {% if producto.stock > 50 %}
+        🟢 Bien surtido
+      {% elif producto.stock > 10 %}
+        🟠 Stock limitado
+      {% else %}
+        🔴 Casi agotado
+      {% endif %}
+    </p>
+
+    <h3 style="font-size: 1.25em; font-weight: 600; color: #c49b6b; margin-bottom: 1em;">
+      📝 Descripción
+    </h3>
+    <p style="margin-bottom: 1.5em;">
+      {% if producto.stock > 50 %}
+        {{ producto.nombre }} es uno de los favoritos de la taberna, siempre disponible para quienes lo desean. Ocupa poco lugar en el inventario.
+      {% elif producto.stock > 10 %}
+        Las reservas de {{ producto.nombre }} están bajando más de lo habitual. ¡Apúrate antes de que desaparezca!
+      {% else %}
+        Quedan pocas unidades de {{ producto.nombre }}. Muy buscado y casi agotado.
+      {% endif %}
+    </p>
+
+    <div style="max-width: 300px; margin: 0 auto;">
+      <a href="{% url 'Taberna:productos' %}" 
+         class="button-link taberneros"
+         style="width: 100%; font-weight: 700;">
+         ⬅️ Volver al Menú de Productos
+      </a>
+    </div>
+  </div>
+{% endblock %}
