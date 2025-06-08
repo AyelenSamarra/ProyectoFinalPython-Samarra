@@ -47,3 +47,52 @@
     </div>
   </div>
 {% endblock %}
+
+<!------------------------------------------------------------------------------------------------------------
+/ Haciendo una tabla del detalle de los taberneros
+
+{% block content %}
+  <ul>
+    <li>Nombre> {{ tabernero.nombre }}</li>
+    <li>Apellido: {{ tabernero.apellido }}</li>
+    <li>Edad: {{ tabernero.edad }}</li>
+    <li>Estado> {{tabernero.estado }}</li>
+    <li>Especialidad: 
+      {% if tabernero.edad > 50 %}
+        Maestro Cervecero
+      {% elif tabernero.edad > 30 %}
+        Chef Principal
+      {% else %}
+        Cantinero
+      {% endif %}
+    </li>
+    <div>
+      <a href="{% url 'Taberna:taberneros' %}" class="button-link taberneros">Volver a los Taberneros</a>
+    </div>
+  </ul>
+{% endblock %}
+    
+
+#Con CRUD:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalle del Tabernero</title>
+</head>
+<body>
+    <h1>Detalle del Tabernero</h1>
+    <p>Nombre: {{ tabernero.nombre }}</p>
+    <p>Apellido: {{ tabernero.apellido }}</p>
+    <p>Edad: {{ tabernero.edad }}</p>
+    <p>Especialidad: 
+        {% if tabernero.edad > 50 %}
+            Maestro Cervecero
+        {% elif tabernero.edad > 30 %}
+            Chef Principal
+        {% else %}
+            Cantinero
+        {% endif %}
+    </p>
+</body>
+</html>

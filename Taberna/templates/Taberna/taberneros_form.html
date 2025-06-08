@@ -27,3 +27,21 @@
     </a>
   </p>
 {% endblock %}
+
+
+<!-- Con CRUD:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actualizar Tabernero</title>
+</head>
+<body>
+    <h1>Actualizar Tabernero</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cambios</button>
+    </form>
+</body>
+</html>

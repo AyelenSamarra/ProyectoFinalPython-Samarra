@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 from .forms import *
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 def index(request):
     return render(request, 'Taberna/index.html')
@@ -92,3 +94,167 @@ def buscar_productos(request):
 
 
 
+# Nuevos Forms para creación, edición, etc.
+
+# -------------------------------------------------Taberneros-------------------------------------------------
+# Crear: 
+
+# def crear_tabernero(request):
+#     if request.method == 'POST':
+#         form = TaberneroForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('Taberna:taberneros')
+#     else:
+#         form = TaberneroForm()
+#     return render(request, 'Taberna/crear_tabernero.html', {'form': form})
+
+# Leer:
+
+# def listar_taberneros(request):
+#     taberneros = Tabernero.objects.all()
+#     return render(request, 'Taberna/taberneros.html', {'taberneros': taberneros})
+
+# Actualizar:
+
+# def actualizar_tabernero(request, pk):
+#     tabernero = get_object_or_404(Tabernero, pk=pk)
+#     if request.method == 'POST':
+#         form = TaberneroForm(request.POST, instance=tabernero)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('Taberna:taberneros')
+#     else:
+#         form = TaberneroForm(instance=tabernero)
+#     return render(request, 'Taberna/actualizar_tabernero.html', {'form': form, 'tabernero': tabernero})
+
+# Eliminar:
+
+# def eliminar_tabernero(request, pk):
+#     tabernero = get_object_or_404(Tabernero, pk=pk)
+#     tabernero.delete()
+#     return redirect('Taberna:taberneros')
+
+# class TaberneroListView(ListView):
+#     model = Tabernero
+#     template_name = 'Taberna/listar_taberneros.html'
+#     context_object_name = 'taberneros'
+
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         busqueda = self.request.GET.get('busqueda', None)
+#         if busqueda:
+#             queryset = queryset.filter(nombre__icontains=busqueda)
+#         return queryset
+
+# class TaberneroDetailView(DetailView):
+#     model = Tabernero
+#     template_name = 'Taberna/detalle_tabernero.html'
+#     context_object_name = 'tabernero'
+
+# class TaberneroDeleteView(DeleteView):
+#     model = Tabernero
+#     success_url = reverse_lazy('Taberna:taberneros')
+
+# -------------------------------------------------Clientes Frecuentes-------------------------------------------------
+# Crear: 
+
+# def crear_cliente(request):
+#     if request.method == 'POST':
+#         form = ClienteFrecuenteForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('Taberna:clientes_frecuentes')
+#     else:
+#         form = ClienteFrecuenteForm()
+#     return render(request, 'Taberna/clientes_frecuentes.html', {'form': form})
+
+# Leer:
+
+# def listar_clientes(request):
+#     clientes_frecuentes = ClienteFrecuente.objects.all()
+#     return render(request, 'Taberna/listar_clientes.html', {'clientes_frecuentes': clientes_frecuentes})
+
+# Actualizar:
+
+# def actualizar_cliente(request, pk):
+#     cliente = get_object_or_404(Cliente, pk=pk)
+#     if request.method == 'POST':
+#         form = ClienteFrecuenteForm(request.POST, instance=cliente)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('Taberna:clientes_frecuentes')
+#     else:
+#         form = ClienteFrecuenteForm(instance=cliente)
+#     return render(request, 'Taberna/actualizar_cliente.html', {'form': form, 'cliente': cliente})
+
+# Eliminar:
+
+# def eliminar_cliente(request, pk):
+#     cliente = get_object_or_404(ClienteFrecuente, pk=pk)
+#     cliente.delete()
+#     return redirect('Taberna:clientes_frecuentes')
+
+# class ClienteListView(ListView):
+#     model = ClienteFrecuente
+#     template_name = 'Taberna/clientes_frecuentes.html'
+#     context_object_name = 'clientes_frecuentes'
+
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         busqueda = self.request.GET.get('busqueda', None)
+#         if busqueda:
+#             queryset = queryset.filter(nombre__icontains=busqueda)
+#         return queryset
+
+# class ClienteFrecuenteDetailView(DetailView):
+#     model = ClienteFrecuente
+#     template_name = 'Taberna/detalle_cliente.html'
+#     context_object_name = 'cliente_frecuente'
+
+# -------------------------------------------------Productos-------------------------------------------------
+# Crear:
+# def crear_producto(request):
+#     if request.method == 'POST':
+#         form = ProductoForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('Taberna:productos')
+#     else:
+#         form = ProductoForm()
+#     return render(request, 'Taberna/crear_producto.html', {'form': form})
+#
+# Leer:
+# def listar_productos(request):
+#     productos = Producto.objects.all()
+#     return render(request, 'Taberna/productos.html', {'productos': productos})
+# Actualizar:
+# def actualizar_producto(request, pk):
+#     producto = get_object_or_404(Producto, pk=pk)
+#     if request.method == 'POST':
+#         form = ProductoForm(request.POST, instance=producto)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('Taberna:productos')
+#     else:
+#         form = ProductoForm(instance=producto)
+#     return render(request, 'Taberna/actualizar_producto.html', {'form': form, 'producto': producto})
+# Eliminar:
+# def eliminar_producto(request, pk):
+#     producto = get_object_or_404(Producto, pk=pk)
+#     producto.delete()
+#     return redirect('Taberna:productos')
+# class ProductoListView(ListView):
+#     model = Producto
+#     template_name = 'Taberna/productos.html'
+#     context_object_name = 'productos'
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         busqueda = self.request.GET.get('busqueda', None)
+#         if busqueda:
+#             queryset = queryset.filter(nombre__icontains=busqueda)
+#         return queryset
+# class ProductoDetailView(DetailView):
+#     model = Producto
+#     template_name = 'Taberna/detalle_producto.html'
+#     context_object_name = 'producto'
