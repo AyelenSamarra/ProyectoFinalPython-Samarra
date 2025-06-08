@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'Taberna'  # Add this for namespace
 
@@ -32,4 +34,11 @@ urlpatterns = [
     path('productos/update/<int:pk>/', views.ProductoUpdateView.as_view(), name='actualizar_producto'),
     path('productos/delete/<int:pk>/', views.ProductoDeleteView.as_view(), name='producto_confirm_delete'),
     path('productos/buscar/', views.BuscarProductoView.as_view(), name='buscar_producto'),
+
+    # Login
+    path('editar_perfil/', views.editar_perfil, name='editar_perfil'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    

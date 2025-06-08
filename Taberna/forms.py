@@ -1,5 +1,5 @@
 from django import forms
-from .models import Tabernero, ClienteFrecuente, Producto
+from .models import Tabernero, ClienteFrecuente, Producto, Avatar, User
 
 class TaberneroForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100, label='Nombre del Tabernero', required=True)
@@ -67,3 +67,21 @@ class BuscarProductoForm(forms.Form):
         if not query:
             raise forms.ValidationError("Este campo es obligatorio.")
         return query
+    
+
+class EditarPerfilForm(forms.Form):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'password']
+        labels = {
+            'first_name': 'Nombre',
+            'last_name': 'Apellido',
+            'email': 'Correo Electrónico'
+        }
+
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ['imagen']
+        

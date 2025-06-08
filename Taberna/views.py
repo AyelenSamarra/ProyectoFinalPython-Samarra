@@ -4,6 +4,9 @@ from .models import *
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from .forms import AvatarForm
 
 def index(request):
     return render(request, 'Taberna/index.html')
@@ -260,3 +263,29 @@ class BuscarProductoView(ListView):
         if query:
             queryset = queryset.filter(nombre__icontains=query)
         return queryset
+
+
+# -------------------------------------------------Login-------------------------------------------------
+
+@login_required
+
+def editar_perfil(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('Taberna:index')
+    else:
+        form = UserCreationForm(instance=request.user)
+    return render(request, 'Taberna/editar_perfil.html', {'form': form})
+
+@login_required
+def upload_avatar(request):
+    if request.method == 'POST':
+        form = AvatarForm(request.POST, request.FILES, instance=request.user.avatar)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = AvatarForm(instance=request.user.avatar)
+    return render(request, 'Taberna/upload_avatar.html', {'form': form})
