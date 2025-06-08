@@ -5,6 +5,10 @@ class TaberneroForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100, label='Nombre del Tabernero', required=True)
     apellido = forms.CharField(max_length=100, label='Apellido del Tabernero', required=True)
     edad = forms.IntegerField(label='Edad del Tabernero', required=True)
+
+    class Meta:
+        model = Tabernero
+        fields = ['nombre', 'apellido', 'edad']
     
     def save(self, commit=True):
         tabernero = Tabernero(
@@ -22,6 +26,10 @@ class ClienteFrecuenteForm(forms.ModelForm):
     apellido = forms.CharField(max_length=100, label='Apellido del Cliente', required=True)
     pedido_favorito = forms.CharField(max_length=100, label='Pedido Favorito', required=True)
 
+    class Meta:
+        model = ClienteFrecuente
+        fields = ['nombre', 'apellido', 'pedido_favorito']
+
     def save(self, commit=True):
         cliente = ClienteFrecuente(
             nombre=self.cleaned_data['nombre'],
@@ -37,6 +45,10 @@ class ProductoForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100, label='Nombre del Producto', required=True)
     precio = forms.CharField(max_length=100, label='Precio del Producto', required=True)
     stock = forms.IntegerField(label='Stock del Producto', required=True)
+
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'precio', 'stock']
 
     def save(self, commit=True):
         producto = Producto(

@@ -1,49 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2 style="font-size: 1.75em; font-weight: bold; color: #c49b6b; margin-bottom: 1em;">
-        Nuestros Taberneros
-    </h2>
-    <p style="margin-bottom: 1.5em; color: #5b4a30;">
-        Nuestro excelente personal mantiene la chispa viva y el ambiente acogedor en Lion's Pride Inn. Conoce a los héroes detrás de la barra.
-    </p>
-
-    <ul style="list-style-type: none; padding: 0; margin-bottom: 2em;">
-        {% for tabernero in taberneros %}
-            <li style="background-color: #6e5a36; padding: 1em; border-radius: 8px; margin-bottom: 0.75em; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);">
-                <a href="{% url 'Taberna:detalle_taberneros' tabernero.id %}" 
-                   style="color: #f1d27a; text-decoration: none; font-weight: 600;"
-                   onmouseover="this.style.textDecoration='underline';"
-                   onmouseout="this.style.textDecoration='none';">
-                    {{ tabernero.nombre }} {{ tabernero.apellido }} ({{ tabernero.edad }} años)
-                </a>
-            </li>
-        {% empty %}
-            <li style="color: #a08c6a;">No hay taberneros disponibles.</li>
-        {% endfor %}
-    </ul>
-
-    <p style="margin-top: 2em; margin-bottom: 0.5em; color: #c49b6b; font-weight: 600;">
-        ¿Nos olvidamos de alguien? ¡Agrégalo aquí!
-    </p>
-
-    <a href="{% url 'Taberna:taberneros_form' %}"
-       class="button-link taberneros"
-       style="display: inline-block; max-width: none; width: auto; padding: 0.75em 1.5em; font-weight: 700;">
-        Agregar Tabernero
-    </a>
-
-    <div style="margin-top: 2em; max-width: 300px;">
-        <a href="{% url 'Taberna:index' %}" 
-            style="padding: 1em; background-color: #a9733d; color: white; border: none; border-radius: 8px; text-align: center; text-decoration: none; font-weight: bold; display: inline-block;">
-            ⬅️ Volver
-        </a>
-    </div>
-{% endblock %}
-
-<!------------------------------------------------------------------------------------------------------------
-/ Haciendo una tabla con la información (lista)
-
 <div class="table-responsive">
   <table class="table table-bordered">
     <thead>
@@ -54,11 +11,12 @@
       </tr>
     </thead>
     <tbody>
-      {% for cliente in clientes_frecuentes %}
+      {% for tabernero in taberneros %}
         <tr>
           <td>{{ tabernero.nombre }}</td>
           <td>{{ tabernero.apellido }}</td>
           <td>{{ tabernero.edad }}</td>
+          <td>{{ tabernero.especialidad }}</td>
           {% if tabernero.edad > 50 %}
             <td>Maestro Cervecero</td>
           {% elif tabernero.edad > 30 %}
@@ -68,15 +26,22 @@
           {% endif %}
           <td>
             <a href="{% url 'Taberna:detalle_taberneros' tabernero.id %}" class="btn btn-sm btn-info">Ver Detalles</a>
-            <a href="{% url 'Taberna:editar_taberneros' tabernero.id %}" class="btn btn-sm btn-warning">Editar</a>
-            <a href="{% url 'Taberna:eliminar_taberneros' tabernero.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+            <a href="{% url 'Taberna:actualizar_tabernero' tabernero.id %}" class="btn btn-sm btn-warning">Editar</a>
+            <a href="{% url 'Taberna:tabernero_confirm_delete' tabernero.id %}" class="btn btn-sm btn-danger">Eliminar</a>
           </td>
         </tr>
       {% empty %}
         <tr>
-          <td colspan="3">No hay clientes frecuentes disponibles.</td>
+          <td colspan="3">No hay taberneros disponibles.</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
+
+<div class="text-center mt-4">
+  <a href="{% url 'Taberna:crear_tabernero' %}" class="btn btn-success">
+    ➕ Agregar nuevo tabernero
+  </a>
+</div>
+{% endblock %}

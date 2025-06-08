@@ -5,18 +5,18 @@
 {% endblock title %}
 
 {% block content_title %}
-    Eliminar Tabernero
+    Eliminar Cliente Frecuente
 {% endblock content_title %}
 
 {% block content %}
     <div class="container">
-        <h2>¿Estás seguro de que quieres eliminar a {{ tabernero.nombre }} {{ tabernero.apellido }}?</h2>
+        <h2>¿Estás seguro de que quieres eliminar a {{ cliente.nombre }} {{ cliente.apellido }}?</h2>
         <p>Esta acción no se puede deshacer.</p>
 
         <form method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Confirmar</button>
-            <a href="{% url 'Taberna:taberneros' %}" class="btn btn-secondary">Cancelar</a>
+            <a href="{% url 'Taberna:clientes_frecuentes' %}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 {% endblock content %}

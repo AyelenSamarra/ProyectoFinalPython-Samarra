@@ -1,42 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2 class="text-2xl font-bold text-yellow-300 mb-4">🍻 Nuestros Clientes Frecuentes</h2>
-  <p class="text-white mb-6">Los valientes aventureros que sobreviven para regresar a la taberna.</p>
-
-  <ul style="list-style-type: none; padding: 0; margin-bottom: 2em;">
-    {% for cliente in clientes_frecuentes %}
-      <li style="background-color: #6e5a36; padding: 1em; border-radius: 8px; margin-bottom: 0.75em; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);">
-        <a href="{% url 'Taberna:detalle_clientes' cliente.id %}" class="text-yellow-300 hover:underline"
-            style="color: #f1d27a; text-decoration: none; font-weight: 600;"
-            onmouseover="this.style.textDecoration='underline';"
-            onmouseout="this.style.textDecoration='none';">
-            {{ cliente.nombre }} {{ cliente.apellido }} ({{ cliente.pedido_favorito }})
-        </a>
-      </li>
-    {% empty %}
-      <li class="text-white">No hay clientes frecuentes disponibles.</li>
-    {% endfor %}
-  </ul>
-
-  <div style="display: flex; flex-direction: column; gap: 1em; max-width: 300px;">
-    <a href="{% url 'Taberna:clientes_form' %}" 
-       style="padding: 1em; background-color: #b5854a; color: white; border: none; border-radius: 8px; text-align: center; text-decoration: none; font-weight: bold;">
-       ➕ Agregar Cliente Frecuente
-    </a>
-
-    <a style="margin-top: 2em; max-width: 300px;">
-        <a href="{% url 'Taberna:index' %}" 
-            style="padding: 1em; background-color: #a9733d; color: white; border: none; border-radius: 8px; text-align: center; text-decoration: none; font-weight: bold; display: inline-block;">
-            ⬅️ Volver
-        </a>
-    </a>
-  </div>
-{% endblock %}
-
-<!------------------------------------------------------------------------------------------------------------
-/ Haciendo una tabla con la información.
-
 <div class="table-responsive">
   <table class="table table-bordered">
     <thead>
@@ -55,12 +19,12 @@
           {% if post.estado == "D" %}
             <td>No avistado hace tiempo</td>
           {% else %}
-            <td>Vivo</td>
+            <td>Aparentemente Vivo</td>
           {% endif %}
           <td>
-            <a href="{% url 'Taberna:detalle_clientes' cliente.id %}" class="btn btn-sm btn-info">Ver Detalles</a>
-            <a href="{% url 'Taberna:editar_clientes' cliente.id %}" class="btn btn-sm btn-warning">Editar</a>
-            <a href="{% url 'Taberna:eliminar_clientes' cliente.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+            <a href="{% url 'Taberna:detalle_clientes_frecuentes' cliente.id %}" class="btn btn-sm btn-info">Ver Detalles</a>
+            <a href="{% url 'Taberna:actualizar_cliente_frecuente' cliente.id %}" class="btn btn-sm btn-warning">Editar</a>
+            <a href="{% url 'Taberna:cliente_frecuente_confirm_delete' cliente.id %}" class="btn btn-sm btn-danger">Eliminar</a>
           </td>
         </tr>
       {% empty %}
@@ -70,3 +34,12 @@
       {% endfor %}
     </tbody>
   </table>
+</div>
+
+<div class="text-center mt-4">
+  <a href="{% url 'Taberna:crear_cliente_frecuente' %}" class="btn btn-success">
+    ➕ Agregar nuevo cliente frecuente
+  </a>
+</div>
+{% endblock %}
+

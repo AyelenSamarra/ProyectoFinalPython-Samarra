@@ -1,36 +1,14 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
-  <div class="bg-gray-800 text-white p-6 rounded-lg max-w-xl mx-auto">
-    <h2 class="text-2xl font-bold text-yellow-300 mb-4">🧝 {{ cliente.nombre }} {{ cliente.apellido }}</h2>
-
-    <p class="mb-4">
-      <strong class="text-yellow-200">🍽️ Pedido Favorito:</strong> {{ cliente.pedido_favorito }}
-    </p>
-
-    <h3 class="text-xl font-semibold text-yellow-300 mt-6 mb-2">📜 Perfil del Patrón</h3>
-    <p class="mb-4">
-      {% if "ale" in cliente.pedido_favorito.lower %}
-        🍺 Un verdadero conocedor de nuestras mejores cervezas, a menudo cerca del fuego contando historias de tierras lejanas.
-      {% elif "stew" in cliente.pedido_favorito.lower %}
-        🥘 Prefiere comidas contundentes para recargar fuerzas. Usualmente cubierto de armadura y recién salido de batalla.
-      {% else %}
-        🕯️ Un cliente misterioso que disfruta los rincones tranquilos de la taberna.
-      {% endif %}
-    </p>
-
-    <h3 class="text-xl font-semibold text-yellow-300 mb-2">👣 Avistamientos Recientes</h3>
-    <ul class="list-disc list-inside mb-6">
-      <li>🗓️ Última visita: hace 2 días</li>
-      <li>🪑 Lugar habitual: mesa en la esquina junto a la ventana</li>
-      <li>💰 Cuenta actual: {% if "ale" in cliente.pedido_favorito.lower %}5 oro{% else %}2 oro{% endif %}</li>
-    </ul>
-
-    <div style="display: flex; flex-direction: column; gap: 1em; max-width: 300px;">
-      <a href="{% url 'Taberna:clientes_frecuentes' %}"
-         style="padding: 1em; background-color: #a9733d; color: white; border: none; border-radius: 8px; text-align: center; text-decoration: none; font-weight: bold;">
-         ⬅️ Volver a Clientes Frecuentes
-      </a>
+  <ul>
+    <li>Nombre> {{ cliente.nombre }}</li>
+    <li>Apellido: {{ cliente.apellido }}</li>
+    <li>Pedido Favorito: {{ cliente.pedido_favorito }}</li>
+    </li>
+    <div>
+      <a href="{% url 'Taberna:clientes_frecuentes' %}" class="button-link taberneros">Volver a los Clientes Frecuentes</a>
     </div>
-  </div>
+  </ul>
 {% endblock %}
+
