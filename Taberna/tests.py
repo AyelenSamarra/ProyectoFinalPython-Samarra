@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Tabernero, ClienteFrecuente, Producto, Avatar, User
+from .models import *
 
 # Create your tests here.
 class ModeloTest(TestCase):

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Log In
+{% endblock title %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <table>
+            {{ form.as.table }}
+        </table>
+        <input type="submit" value="Iniciar Sesión">
+        </form>
+    </body>
+    <br>
+    <a href="{% url 'Taberna:home' %}">Volver al inicio</a>
+    <br>
+{% endblock content %}

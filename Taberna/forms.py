@@ -1,5 +1,6 @@
 from django import forms
-from .models import Tabernero, ClienteFrecuente, Producto, Avatar, User
+from .models import *
+from django.contrib.auth.forms import UserCreationForm
 
 class TaberneroForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100, label='Nombre del Tabernero', required=True)
@@ -68,20 +69,14 @@ class BuscarProductoForm(forms.Form):
             raise forms.ValidationError("Este campo es obligatorio.")
         return query
     
+    
+class RegistroForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Contraseña a confirmar", widget=forms.PasswordInput)
 
-class EditarPerfilForm(forms.Form):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'password']
-        labels = {
-            'first_name': 'Nombre',
-            'last_name': 'Apellido',
-            'email': 'Correo Electrónico'
-        }
+        fields = ["username", "email", "password1", "password2"]
 
 
-class AvatarForm(forms.ModelForm):
-    class Meta:
-        model = Avatar
-        fields = ['imagen']
-        

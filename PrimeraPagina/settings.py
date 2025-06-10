@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,6 +29,8 @@ ALLOWED_HOSTS = []
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTH_USER_MODEL = 'Taberna.User'
 
 
 # Application definition
@@ -84,9 +85,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-ALLOWED_HOSTS = ['*']
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

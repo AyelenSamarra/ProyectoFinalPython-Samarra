@@ -2,11 +2,13 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
 
 app_name = 'Taberna'  # Add this for namespace
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.home, name='home'),
+    path('/<nombre>/<apellido>/', views.home, name='home'),
 
     #Taberneros
 
@@ -36,7 +38,9 @@ urlpatterns = [
     path('productos/buscar/', views.BuscarProductoView.as_view(), name='buscar_producto'),
 
     # Login
-    path('editar_perfil/', views.editar_perfil, name='editar_perfil'),
+    path('registro/', views.register, name="registro"),
+    path('login/', views.loginRequest, name="login"),
+    path('logout/', LogoutView.as_view(next_page='Taberna:home'), name="logout"),
 ]
 
 if settings.DEBUG:
