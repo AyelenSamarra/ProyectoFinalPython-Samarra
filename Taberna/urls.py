@@ -1,7 +1,5 @@
 from django.urls import path
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib.auth.views import LogoutView
 
 app_name = 'Taberna'  # Add this for namespace
@@ -39,10 +37,9 @@ urlpatterns = [
 
     # Login
     path('registro/', views.register, name="registro"),
-    path('login/', views.loginRequest, name="login"),
-    path('logout/', LogoutView.as_view(next_page='Taberna:home'), name="logout"),
+    path('login/', views.login_request, name="login"),
+    path('logout/', LogoutView.as_view(next_page='Taberna:home'), name='logout'),
+    path('editar_perfil/', views.editar_perfil, name='editar_perfil'),
+    path('agregar_avatar/', views.agregar_avatar, name="agregar_avatar"),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     

@@ -1,25 +1,12 @@
 from django import forms
-from .models import *
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms  import UserCreationForm
+from .models import User, Avatar
+from django.contrib.auth.forms import UserChangeForm
 
 class TaberneroForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100, label='Nombre del Tabernero', required=True)
     apellido = forms.CharField(max_length=100, label='Apellido del Tabernero', required=True)
     edad = forms.IntegerField(label='Edad del Tabernero', required=True)
-
-    class Meta:
-        model = Tabernero
-        fields = ['nombre', 'apellido', 'edad']
-    
-    def save(self, commit=True):
-        tabernero = Tabernero(
-            nombre=self.cleaned_data['nombre'],
-            apellido=self.cleaned_data['apellido'],
-            edad=self.cleaned_data['edad']
-        )
-        if commit:
-            tabernero.save()
-        return tabernero
 
 
 class ClienteFrecuenteForm(forms.ModelForm):
@@ -27,39 +14,12 @@ class ClienteFrecuenteForm(forms.ModelForm):
     apellido = forms.CharField(max_length=100, label='Apellido del Cliente', required=True)
     pedido_favorito = forms.CharField(max_length=100, label='Pedido Favorito', required=True)
 
-    class Meta:
-        model = ClienteFrecuente
-        fields = ['nombre', 'apellido', 'pedido_favorito']
-
-    def save(self, commit=True):
-        cliente = ClienteFrecuente(
-            nombre=self.cleaned_data['nombre'],
-            apellido=self.cleaned_data['apellido'],
-            pedido_favorito=self.cleaned_data['pedido_favorito']
-        )
-        if commit:
-            cliente.save()
-        return cliente
-
 
 class ProductoForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100, label='Nombre del Producto', required=True)
     precio = forms.CharField(max_length=100, label='Precio del Producto', required=True)
     stock = forms.IntegerField(label='Stock del Producto', required=True)
 
-    class Meta:
-        model = Producto
-        fields = ['nombre', 'precio', 'stock']
-
-    def save(self, commit=True):
-        producto = Producto(
-            nombre=self.cleaned_data['nombre'],
-            precio=self.cleaned_data['precio'],
-            stock=self.cleaned_data['stock']
-        )
-        if commit:
-            producto.save()
-        return producto
 
 class BuscarProductoForm(forms.Form):
     query = forms.CharField(max_length=100, label='Buscar Producto por Nombre', required=False)
@@ -69,7 +29,7 @@ class BuscarProductoForm(forms.Form):
             raise forms.ValidationError("Este campo es obligatorio.")
         return query
     
-    
+
 class RegistroForm(UserCreationForm):
     email = forms.EmailField(required=True)
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
@@ -80,3 +40,15 @@ class RegistroForm(UserCreationForm):
         fields = ["username", "email", "password1", "password2"]
 
 
+class UserEditForm(UserChangeForm):
+    email = forms.EmailField(required=True)
+    nombre = forms.CharField(label="Nombre", max_length=50, required=True)
+    apellido = forms.CharField(label="Apellido", max_length=50, required=True)
+
+    class Meta:
+        model = User
+        fields = ["email", "nombre", "apellido"]
+
+
+class AvatarForm(forms.Form):
+    imagen = forms.ImageField(required=True)   
