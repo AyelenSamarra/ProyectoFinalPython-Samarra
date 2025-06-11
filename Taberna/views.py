@@ -18,10 +18,13 @@ def home(request):
 
 class TaberneroListView(ListView):
     model = Tabernero
+    template_name = 'Taberna/taberneros.html'
+    context_object_name = 'taberneros'
 
 class TaberneroCreateView(LoginRequiredMixin, CreateView):
     model = Tabernero
     fields = ["nombre", "apellido", "edad"]
+    template_name = 'Taberna/crear_tabernero.html'
     success_url = reverse_lazy('Taberna:taberneros')
 
 class TaberneroDetailView(DetailView):

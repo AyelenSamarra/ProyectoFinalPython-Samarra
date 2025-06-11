@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Lion's Pride Inn{% endblock %}</title>
+
+    <!-- Fuentes medievales -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IM+Fell+English&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
+
+
+    <style>
+        body {
+            font-family: 'IM Fell English', serif;
+            background-color: #f5f1e8;
+            color: #3e2f1c;
+            margin: 0;
+            padding-top: 70px; /* espacio para la barra fija */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2em;
+        }
+
+        /* Encabezado principal */
+        header {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+
+        header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3em;
+            margin: 0;
+            color: #6e4b1a;
+            text-shadow: 2px 2px 3px #d3b97a;
+        }
+
+        /* Barra superior */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #6e4b1a;
+            color: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .top-bar .left {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2em;
+        }
+
+        .top-bar .right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .top-bar a.btn {
+            background-color: #d3b97a;
+            color: #3e2f1c;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .top-bar a.btn:hover {
+            background-color: #e5c88c;
+        }
+
+        .top-bar img {
+            border-radius: 50%;
+            border: 2px solid #d3b97a;
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Botones principales */
+        a.button-link {
+            display: inline-block;
+            padding: 1em;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1em;
+            width: 100%;
+            max-width: 300px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+            user-select: none;
+            font-family: 'Cinzel', serif;
+        }
+
+        a.button-link:hover {
+            filter: brightness(110%);
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            margin-top: 2em;
+            align-items: center;
+        }
+
+        a.taberneros {
+            background-color: #a87c4f;
+        }
+
+        a.clientes {
+            background-color: #b28d5b;
+        }
+
+        a.productos {
+            background-color: #c49b6b;
+        }
+
+        /* Contenido */
+        main {
+            line-height: 1.7;
+            font-size: 1.1em;
+        }
+
+        h2, h3 {
+            font-family: 'Cinzel', serif;
+            color: #4e3311;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        /* Fuente rúnica/medieval para títulos y elementos destacados */
+        .rune-font {
+            font-family: 'Uncial Antiqua', cursive;
+            letter-spacing: 0.05em;
+            text-shadow: 1px 1px 2px #d3b97a;
+        }
+
+        /* Aplica en los encabezados principales automáticamente */
+        header h1, h2, h3 {
+            font-family: 'Uncial Antiqua', cursive;
+        }
+
+        /* Opcional: aplica también en botones */
+        .button-link {
+            font-family: 'Uncial Antiqua', cursive;
+        }
+
+    </style>
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- Barra superior -->
+    <div class="top-bar">
+        <div class="left">
+            🏰 Lion's Pride Inn
+        </div>
+        <div class="right">
+            {% if user.is_authenticated %}
+                <span>{{ user.nombre }} {{ user.apellido }}</span>
+                <a href="{% url 'Taberna:editar_perfil' %}" class="btn">Perfil</a>
+                <a href="#" class="btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                <a href="{% url 'Taberna:agregar_avatar' %}">
+                    <img src="{{ request.session.avatar }}" alt="Avatar">
+                </a>
+                <form id="logout-form" method="post" action="{% url 'Taberna:logout' %}" style="display: none;">
+                    {% csrf_token %}
+                </form>
+            {% else %}
+                <a href="{% url 'Taberna:login' %}" class="btn">Login</a>
+                <a href="{% url 'Taberna:registro' %}" class="btn">Registrarse</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <header>
+            <h1>Lion's Pride Inn</h1>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

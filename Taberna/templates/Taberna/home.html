@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "Taberna/base.html" %}
 
 {% block title %}Lion's Pride Inn{% endblock %}
 
@@ -17,23 +17,4 @@
         🍻 Ver Productos
     </a>
 </div>
-<nav class="navbar navbar-dark bg-dark static-top">
-    <div class="container">
-        {% if user.is_authenticated %}
-                    <a class="btn btn-primary" href="{% url 'Taberna:editar_perfil' %}">Perfil</a>
-                    <a class="btn btn-success" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-
-                    <form id="logout-form" method="post" action="{% url 'Taberna:logout' %}" style="display: none;">
-                        {% csrf_token %}
-                    </form>
-                    <p style="color:green"> [{{user.nombre}} {{user.apellido}}]</p>
-                                    <div class="text-center">
-                    <a href="{% url 'Taberna:agregar_avatar' %}"><img src="{{ request.session.avatar }}" height="40px" weight="40px" alt="mi foto"></a>
-                </div>
-                {% else %}
-                    <a class="btn btn-primary" href="{% url 'Taberna:login' %}">Login</a>
-                    <a class="btn btn-success" href="{% url 'Taberna:registro' %}">Registrarse</a>
-                {% endif %}
-
-</nav>
 {% endblock %}

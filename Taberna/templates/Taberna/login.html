@@ -1,20 +1,18 @@
-{% extends "base.html" %}
+{% extends "Taberna/base.html" %}
 
 {% block title %}
-    Log In
+    Iniciar Sesión
 {% endblock title %}
 
 {% block content %}
-    <form method="post">
+    <h2>🍺 Bienvenido de nuevo, aventurero</h2>
+    <form method="post" style="margin-top: 1.5em;">
         {% csrf_token %}
         {{ form.as_p }}
-        <table>
-            {{ form.as.table }}
-        </table>
-        <input type="submit" value="Iniciar Sesión">
-        </form>
-    </body>
-    <br>
-    <a href="{% url 'Taberna:home' %}">Volver al inicio</a>
-    <br>
+
+        <div class="button-container">
+            <input type="submit" value="Iniciar Sesión" class="button-link taberneros"/>
+            <a href="{% url 'Taberna:home' %}" class="button-link clientes">🏠 Volver al Inicio</a>
+        </div>
+    </form>
 {% endblock content %}
