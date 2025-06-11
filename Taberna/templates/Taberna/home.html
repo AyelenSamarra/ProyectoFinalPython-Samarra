@@ -1,20 +1,20 @@
 {% extends "Taberna/base.html" %}
+{% load static %}
 
 {% block title %}Lion's Pride Inn{% endblock %}
 
 {% block content %}
-<h2>¡Bienvenido a Lion's Pride Inn!</h2>
-<p>Descansa tus botas, aventurero, y sé bienvenido a la taberna más famosa de Elwynn Forest:</p>
-
-<div class="button-container">
-    <a href="{% url 'Taberna:taberneros' %}" class="button-link taberneros">
-        👨‍🍳 Ver Taberneros
-    </a>
-    <a href="{% url 'Taberna:clientes_frecuentes' %}" class="button-link clientes">
-        🧙‍♂️ Ver Clientes Frecuentes
-    </a>
-    <a href="{% url 'Taberna:productos' %}" class="button-link productos">
-        🍻 Ver Productos
-    </a>
+<div class="fullscreen-background">
+    <div class="welcome-content">
+        <h1>Lion's Pride Inn</h1>
+        <p>Descansa tus botas, aventurero, y cuéntanos tu historia.</p>
+        <div class="button-container hero-buttons">
+            <a href="{% url 'Taberna:taberneros' %}" class="button-link taberneros">👨‍🍳 Taberneros</a>
+            <a href="{% url 'Taberna:clientes_frecuentes' %}" class="button-link clientes">🧙‍♂️ Clientes Frecuentes</a>
+            <a href="{% url 'Taberna:productos' %}" class="button-link productos">🍻 Menú</a>
+            <a href="{% url 'Taberna:about' %}" class="button-link">🧾 ¡Conoceme!</a>
+        </div>
+    </div>
 </div>
+
 {% endblock %}

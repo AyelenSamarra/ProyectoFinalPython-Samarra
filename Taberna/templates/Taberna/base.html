@@ -177,6 +177,7 @@
             🏰 Lion's Pride Inn
         </div>
         <div class="right">
+            
             {% if user.is_authenticated %}
                 <span>{{ user.nombre }} {{ user.apellido }}</span>
                 <a href="{% url 'Taberna:editar_perfil' %}" class="btn">Perfil</a>

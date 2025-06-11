@@ -2,9 +2,9 @@
 
 {% block content %}
   <ul>
-    <li>Nombre> {{ cliente.nombre }}</li>
-    <li>Apellido: {{ cliente.apellido }}</li>
-    <li>Pedido Favorito: {{ cliente.pedido_favorito }}</li>
+    <li>Nombre: {{ cliente_frecuente.nombre }}</li>
+    <li>Apellido: {{ cliente_frecuente.apellido }}</li>
+    <li>Pedido Favorito: {{ cliente_frecuente.pedido_favorito }}</li>
     </li>
     <div>
       <a href="{% url 'Taberna:clientes_frecuentes' %}" class="button-link taberneros">Volver a los Clientes Frecuentes</a>

@@ -1,0 +1,15 @@
+{% extends "Taberna/base.html" %}
+
+{% block title %}Acerca de mí{% endblock %}
+
+{% block content %}
+<h2>Sobre el creador de la taberna</h2>
+<p>Hola, soy el creador de este sitio inspirado en el universo de fantasía de World of Warcraft. Esta taberna digital busca capturar la atmósfera cálida y mágica del Lion’s Pride Inn, donde cada visitante es bienvenido a quedarse, explorar y descubrir.</p>
+<p>Espero que disfrutes tu estadía tanto como yo disfruté construyéndola. ¡Salud, aventurero!</p>
+
+<div class="text-center mt-4">
+  <a href="{% url 'Taberna:home' %}" class="btn btn-success">
+    Volver al inicio
+  </a>
+</div>
+{% endblock %}

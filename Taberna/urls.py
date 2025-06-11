@@ -7,6 +7,7 @@ app_name = 'Taberna'  # Add this for namespace
 urlpatterns = [
     path('', views.home, name='home'),
     path('/<nombre>/<apellido>/', views.home, name='home'),
+    path('about/', views.about, name='about'),
 
     #Taberneros
 

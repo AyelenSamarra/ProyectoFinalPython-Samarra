@@ -2,6 +2,7 @@ from .forms import *
 from .models import *
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.conf import settings
 
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
@@ -11,8 +12,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+
+
 def home(request):
-    return render(request, 'Taberna/home.html')
+    context = {
+        'MEDIA_URL': settings.MEDIA_URL,
+    }
+    return render(request, 'Taberna/home.html', context)
+
+
+def about(request):
+    return render(request, 'Taberna/about.html')
 
 # -------------------------------------------------Taberneros-------------------------------------------------
 
@@ -35,10 +45,12 @@ class TaberneroDetailView(DetailView):
 class TaberneroUpdateView(LoginRequiredMixin, UpdateView):
     model = Tabernero
     fields = ["nombre", "apellido", "edad"]
+    template_name = 'Taberna/actualizar_tabernero.html'
     success_url = reverse_lazy('Taberna:taberneros')
 
 class TaberneroDeleteView(LoginRequiredMixin, DeleteView):
     model = Tabernero
+    template_name = 'Taberna/tabernero_confirm_delete.html'
     success_url = reverse_lazy('Taberna:taberneros')
 
 
@@ -48,8 +60,8 @@ class TaberneroDeleteView(LoginRequiredMixin, DeleteView):
 
 class ClienteFrecuenteCreateView(LoginRequiredMixin, CreateView):
     model = ClienteFrecuente
-    form_class = ClienteFrecuenteForm
-    template_name = 'Taberna/crear_cliente.html'
+    fields = ["nombre", "apellido", "pedido_favorito"]
+    template_name = 'Taberna/crear_cliente_frecuente.html'
     success_url = reverse_lazy('Taberna:clientes_frecuentes')
 
 class ClienteFrecuenteListView(ListView):
@@ -71,7 +83,7 @@ class ClienteFrecuenteDetailView(DetailView):
 
 class ClienteFrecuenteUpdateView(LoginRequiredMixin, UpdateView):
     model = ClienteFrecuente
-    form_class = ClienteFrecuenteForm
+    fields = ["nombre", "apellido", "pedido_favorito"]
     template_name = 'Taberna/actualizar_cliente_frecuente.html'
     success_url = reverse_lazy('Taberna:clientes_frecuentes')
 
@@ -85,7 +97,7 @@ class ClienteFrecuenteDeleteView(LoginRequiredMixin, DeleteView):
 
 class ProductoCreateView(LoginRequiredMixin, CreateView):
     model = Producto
-    form_class = ProductoForm
+    fields = ["nombre", "precio", "stock"]
     template_name = 'Taberna/crear_producto.html'
     success_url = reverse_lazy('Taberna:productos')
 
@@ -108,12 +120,13 @@ class ProductoDetailView(DetailView):
 
 class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     model = Producto
-    form_class = ProductoForm
+    fields = ["nombre", "precio", "stock"]
     template_name = 'Taberna/actualizar_producto.html'
     success_url = reverse_lazy('Taberna:productos')
 
 class ProductoDeleteView(LoginRequiredMixin, DeleteView):
     model = Producto
+    template_name = 'Taberna/producto_confirm_delete.html'
     success_url = reverse_lazy('Taberna:productos')
 
 
