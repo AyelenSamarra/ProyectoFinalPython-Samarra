@@ -4,15 +4,17 @@
 
 {% block content %}
 <div class="container mt-5">
-  <h1 class="text-warning mb-4">Actualizar Avatar</h1>
-  <form method="post" enctype="multipart/form-data" class="bg-dark p-4 rounded shadow w-50 mx-auto">
+  <h2 class="text-warning mb-4">Actualizar Avatar</h2>
+  <form method="post" enctype="multipart/form-data" class="bg-taberna text-white p-4 rounded shadow w-50 mx-auto">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary w-100">Actualizar Avatar</button>
+    <div class="d-grid gap-2 mt-4">
+    <button type="submit" class="btn btn-edicion w-100">Actualizar Avatar</button>
+    </div>
   </form>
-
-  <div class="text-center mt-3">
+  <div class="text-center mt-4">
     <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">Volver al inicio</a>
+  </div>
   </div>
 </div>
 {% endblock %}
