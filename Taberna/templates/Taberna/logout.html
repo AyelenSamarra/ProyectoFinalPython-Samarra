@@ -1,14 +1,12 @@
 {% extends "Taberna/base.html" %}
 
-
 {% block title %}
-<h1 class="mb-5">Logout</h1>                                
+  <h1 class="mb-4 text-center text-success">Has cerrado sesión exitosamente</h1>
 {% endblock title %}
 
-
-{% block content %}   
-<form method="post" action="">
-    {% csrf_token %}
-    <button type="submit">Logout</button>
-</form>
+{% block content %}
+<div class="d-flex flex-column align-items-center mt-4">
+  <p class="lead text-muted">Gracias por tu visita, ¡vuelve pronto a la taberna!</p>
+  <a href="{% url 'Taberna:home' %}" class="btn btn-secondary mt-3">Volver al inicio</a>
+</div>
 {% endblock content %}

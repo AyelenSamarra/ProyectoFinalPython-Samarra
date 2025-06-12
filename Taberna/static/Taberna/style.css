@@ -150,7 +150,7 @@ main {
     font-size: 1.1em;
 }
 
-h2, h3 {
+h2, h3, h4 {
     font-family: 'Cinzel', serif;
     color: #4e3311;
 }
@@ -167,7 +167,7 @@ p {
 }
 
 /* Aplica en los encabezados principales automáticamente */
-header h1, h2, h3 {
+header h1, h2, h3, h4 {
     font-family: 'Uncial Antiqua', cursive;
 }
 
@@ -202,5 +202,10 @@ header h1, h2, h3 {
 
 .btn-edicion {
     background-color: #e2a75a !important;
+    color: #fdf6e3;
+}
+
+.btn-tabern {
+    background-color: #50350e !important;
     color: #fdf6e3;
 }

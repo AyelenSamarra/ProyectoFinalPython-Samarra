@@ -10,6 +10,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth import update_session_auth_hash
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
@@ -222,3 +223,19 @@ def agregar_avatar(request):
     else:
         form = AvatarForm()
     return render(request, "Taberna/agregar_avatar.html", {"form": form})  
+
+@login_required
+def password_exito(request):
+    return render(request, "Taberna/password_exito.html")
+
+@login_required
+def password_cambio(request):
+    if request.method == "POST":
+        form = PasswordCambioForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)  # Importante para no cerrar sesión
+            return redirect('Taberna:password_exito')
+    else:
+        form = PasswordCambioForm(user=request.user)
+    return render(request, 'Taberna/password_cambio.html', {'form': form})

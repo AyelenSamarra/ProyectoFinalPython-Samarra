@@ -1,7 +1,8 @@
 from django import forms
-from django.contrib.auth.forms  import UserCreationForm
+from django.contrib.auth.forms  import UserCreationForm, PasswordChangeForm
 from .models import User, Avatar
 from django.contrib.auth.forms import UserChangeForm
+from django.urls import reverse_lazy
 
 class TaberneroForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100, label='Nombre del Tabernero', required=True)
@@ -39,12 +40,18 @@ class RegistroForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data['password'])
+        if commit:
+            user.save()
+        return user
 
-class UserEditForm(UserChangeForm):
+class UserEditForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     nombre = forms.CharField(label="Nombre", max_length=50, required=True)
     apellido = forms.CharField(label="Apellido", max_length=50, required=True)
-
+    
     class Meta:
         model = User
         fields = ["email", "nombre", "apellido"]
@@ -52,3 +59,18 @@ class UserEditForm(UserChangeForm):
 
 class AvatarForm(forms.Form):
     imagen = forms.ImageField(required=True)   
+
+
+class PasswordCambioForm(PasswordChangeForm):
+    old_password = forms.CharField(label="Contraseña Actual", widget=forms.PasswordInput, required=True)
+    new_password1 = forms.CharField(label="Nueva Contraseña", widget=forms.PasswordInput, required=True)
+    new_password2 = forms.CharField(label="Confirmar Nueva Contraseña", widget=forms.PasswordInput, required=True)
+
+    class Meta:
+        model = User
+        fields = ('old_password', 'new_password1', 'new_password2')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.success_url = reverse_lazy('Taberna:password_exito')
+

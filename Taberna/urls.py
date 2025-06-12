@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth import views as auth_views
 
 app_name = 'Taberna'  # Add this for namespace
 
@@ -39,8 +40,10 @@ urlpatterns = [
     # Login
     path('registro/', views.register, name="registro"),
     path('login/', views.login_request, name="login"),
-    path('logout/', LogoutView.as_view(next_page='Taberna:home'), name='logout'),
+    path('logout/', LogoutView.as_view(template_name='Taberna/logout.html'), name='logout'),
     path('editar_perfil/', views.editar_perfil, name='editar_perfil'),
     path('agregar_avatar/', views.agregar_avatar, name="agregar_avatar"),
+    path('password_cambio/', views.password_cambio, name='password_cambio'),
+    path('password_exito/', views.password_exito, name='password_exito'),
 ]
     
