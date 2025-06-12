@@ -1,0 +1,29 @@
+# Base de datos SQLite
+*.sqlite3
+*.db
+*.sqlite
+
+# Directorios y archivos de Django
+/__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos multimedia subidos por usuarios
+/media/
+
+# Entorno virtual
+venv/
+.env/
+.env.local
+.env.development
+.env.production
+
+# Archivos de IDE/Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
