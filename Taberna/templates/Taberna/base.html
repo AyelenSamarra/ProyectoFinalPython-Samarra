@@ -32,7 +32,15 @@
                     <a href="{% url 'Taberna:editar_perfil' %}" class="btn btn-outline-light btn-sm me-2">Perfil</a>
                     <a href="#" class="btn btn-outline-light btn-sm me-2" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                     <a href="{% url 'Taberna:agregar_avatar' %}" class="me-2">
-                        <img src="{{ request.session.avatar }}" alt="Avatar" class="rounded-circle" style="height: 40px; width: 40px; object-fit: cover;">
+                        {% if request.session.avatar %}
+                            <a href="{% url 'Taberna:agregar_avatar' %}" class="me-2">
+                                <img src="{{ request.session.avatar }}" alt="Avatar" class="rounded-circle" style="height: 40px; width: 40px; object-fit: cover;">
+                            </a>
+                        {% else %}
+                            <a href="{% url 'Taberna:agregar_avatar' %}" class="me-2">
+                                <img src="/media/avatares/default.jpeg" alt="Avatar" class="rounded-circle" style="height: 40px; width: 40px; object-fit: cover;">
+                            </a>
+                        {% endif %}
                     </a>
                     <form id="logout-form" method="post" action="{% url 'Taberna:logout' %}" style="display: none;">
                         {% csrf_token %}

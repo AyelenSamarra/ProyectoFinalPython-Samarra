@@ -166,10 +166,10 @@ def login_request(request):
             #Buscar Avatar
             try:
                 avatar = Avatar.objects.get(user=request.user.id).imagen.url
-            except:
-                avatar = "/media/avatares/default.jpg"
-            finally:
-                request.session["avatar"] = avatar
+            except Avatar.DoesNotExist:
+                avatar = "/media/avatares/default.jpeg"
+            #finally:
+            #    request.session["avatar"] = avatar
             #__            
             return render(request, "Taberna/home.html")
         else:
