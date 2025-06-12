@@ -1,48 +1,48 @@
 {% extends "Taberna/base.html" %}
 
 {% block content %}
-<div class="table-responsive">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Pedido Favorito</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for cliente in clientes_frecuentes %}
-        <tr>
-          <td>{{ cliente.nombre }}</td>
-          <td>{{ cliente.apellido }}</td>
-          <td>{{ cliente.pedido_favorito }}</td>
-          {% if post.estado == "D" %}
-            <td>No avistado hace tiempo</td>
-          {% else %}
-            <td>Aparentemente Vivo</td>
-          {% endif %}
-          <td>
-            <a href="{% url 'Taberna:detalle_clientes_frecuentes' cliente.id %}" class="btn btn-sm btn-info">Ver Detalles</a>
-            <a href="{% url 'Taberna:actualizar_cliente_frecuente' cliente.id %}" class="btn btn-sm btn-warning">Editar</a>
-            <a href="{% url 'Taberna:cliente_frecuente_confirm_delete' cliente.id %}" class="btn btn-sm btn-danger">Eliminar</a>
-          </td>
+<div class="container mt-5">
+    <h2 class="mb-4">Clientes Frecuentes</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover align-middle">
+        <thead class="bg-listas text-white">
+          <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Pedido Favorito</th>
+          <th>Estado</th>
+          <th>Acciones</th>
         </tr>
-      {% empty %}
-        <tr>
-          <td colspan="3">No hay clientes frecuentes disponibles.</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        {% for cliente in clientes_frecuentes %}
+          <tr>
+            <td>{{ cliente.nombre }}</td>
+            <td>{{ cliente.apellido }}</td>
+            <td>{{ cliente.pedido_favorito }}</td>
+            <td>{% if post.estado == "D" %}No avistado hace tiempo{% else %}Aparentemente Vivo{% endif %}</td>
+            <td>
+              <a href="{% url 'Taberna:detalle_clientes_frecuentes' cliente.id %}" class="btn btn-informacion btn-sm">Ver</a>
+              {% if user.is_authenticated %}
+                <a href="{% url 'Taberna:actualizar_cliente_frecuente' cliente.id %}" class="btn btn-alerta btn-sm">Editar</a>
+                <a href="{% url 'Taberna:cliente_frecuente_confirm_delete' cliente.id %}" class="btn btn-peligro btn-sm">Eliminar</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5" class="text-center">No hay clientes frecuentes disponibles.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
-<div class="text-center mt-4">
-  <a href="{% url 'Taberna:crear_cliente_frecuente' %}" class="btn btn-success">
-    ➕ Agregar nuevo cliente frecuente
-  </a>
-  <br>
-    <a href="{% url 'Taberna:home' %}">Volver al inicio</a>
-  <br>
+  <div class="text-center mt-4">
+      <a href="{% url 'Taberna:crear_cliente_frecuente' %}" class="btn btn-success me-2">
+        ➕ Agregar nuevo cliente frecuente
+      </a>
+      <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">Volver al inicio</a>
+    </div>
 </div>
 {% endblock %}
-

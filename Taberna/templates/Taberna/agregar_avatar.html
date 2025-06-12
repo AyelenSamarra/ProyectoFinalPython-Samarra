@@ -1,22 +1,18 @@
 {% extends "Taberna/base.html" %}
 
+{% block title %}Avatar{% endblock %}
 
-{% block title %}
-<h1 class="mb-5">Avatar</h1>                                
-{% endblock title %}
-
-
-{% block content %}   
-
-<form action="" method="post" enctype="multipart/form-data">
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-warning mb-4">Actualizar Avatar</h1>
+  <form method="post" enctype="multipart/form-data" class="bg-dark p-4 rounded shadow w-50 mx-auto">
     {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Actualizar Avatar">
-</form>
-<br>
-    <a href="{% url 'Taberna:home' %}">Volver al inicio</a>
-<br>
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary w-100">Actualizar Avatar</button>
+  </form>
 
-{% endblock content %}
+  <div class="text-center mt-3">
+    <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">Volver al inicio</a>
+  </div>
+</div>
+{% endblock %}

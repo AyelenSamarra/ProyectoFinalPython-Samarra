@@ -1,14 +1,13 @@
 {% extends "Taberna/base.html" %}
 
 {% block content %}
-  <ul>
-    <li>Nombre: {{ producto.nombre }}</li>
-    <li>Precio: {{ producto.precio }}</li>
-    <li>Stock: {{ producto.stock }}</li>
-    </li>
-    <div>
-      <a href="{% url 'Taberna:productos' %}" class="button-link taberneros">Volver al Menu</a>
-    </div>
+  <ul class="list-group mb-3">
+    <li class="list-group-item">Nombre: {{ producto.nombre }}</li>
+    <li class="list-group-item">Precio: {{ producto.precio }}</li>
+    <li class="list-group-item">Stock: {{ producto.stock }}</li>
   </ul>
+  <div>
+    <a href="{% url 'Taberna:productos' %}" class="btn btn-secondary">Volver al Menú</a>
+  </div>
 {% endblock %}
 

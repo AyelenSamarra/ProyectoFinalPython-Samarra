@@ -1,18 +1,25 @@
 {% extends "Taberna/base.html" %}
 
-{% block title %}
-    Registro de Aventurero
-{% endblock title %}
+{% block title %}Registro de Aventurero{% endblock %}
 
 {% block content %}
-    <h2>🛡️ Registra tu nombre en los libros de la taberna</h2>
-    <form method="post" style="margin-top: 1.5em;">
+<div class="container mt-5">
+    <h2 class="mb-4">🛡️ Registra tu nombre en los libros de la taberna</h2>
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-
-        <div class="button-container">
-            <input type="submit" value="Registrarse" class="button-link productos" />
-            <a href="{% url 'Taberna:home' %}" class="button-link clientes">🏠 Volver al Inicio</a>
+        {% for field in form %}
+          <div class="mb-3">
+              {{ field.label_tag }}
+              {{ field }}
+              {% if field.errors %}
+                <div class="text-danger">{{ field.errors }}</div>
+              {% endif %}
+          </div>
+        {% endfor %}
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">Registrarse</button>
+            <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">🏠 Volver al Inicio</a>
         </div>
     </form>
-{% endblock content %}
+</div>
+{% endblock %}

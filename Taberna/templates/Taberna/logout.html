@@ -1,14 +1,14 @@
 {% extends "Taberna/base.html" %}
 
 
-{% block titulo %}
+{% block title %}
 <h1 class="mb-5">Logout</h1>                                
-{% endblock titulo %}
+{% endblock title %}
 
 
-{% block contenido %}   
+{% block content %}   
 <form method="post" action="">
     {% csrf_token %}
     <button type="submit">Logout</button>
 </form>
-{% endblock contenido %}
+{% endblock content %}

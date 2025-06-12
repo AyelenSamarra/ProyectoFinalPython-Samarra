@@ -1,50 +1,56 @@
 {% extends "Taberna/base.html" %}
 
 {% block content %}
-<div class="table-responsive">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Edad</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for tabernero in taberneros %}
-        <tr>
-          <td>{{ tabernero.nombre }}</td>
-          <td>{{ tabernero.apellido }}</td>
-          <td>{{ tabernero.edad }}</td>
-          <td>{{ tabernero.especialidad }}</td>
-          {% if tabernero.edad > 50 %}
-            <td>Maestro Cervecero</td>
-          {% elif tabernero.edad > 30 %}
-            <td>Chef Principal</td>
-          {% else %}
-            <td>Cantinero</td>
-          {% endif %}
-          <td>
-            <a href="{% url 'Taberna:detalle_taberneros' tabernero.id %}" class="btn btn-sm btn-info">Ver Detalles</a>
-            <a href="{% url 'Taberna:actualizar_tabernero' tabernero.id %}" class="btn btn-sm btn-warning">Editar</a>
-            <a href="{% url 'Taberna:tabernero_confirm_delete' tabernero.id %}" class="btn btn-sm btn-danger">Eliminar</a>
-          </td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="3">No hay taberneros disponibles.</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+<div class="container mt-5">
+  <h2 class="mb-4">Taberneros en Servicio</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover align-middle">
+        <thead class="bg-listas text-white">
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Especialidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tabernero in taberneros %}
+            <tr>
+              <td>{{ tabernero.nombre }}</td>
+              <td>{{ tabernero.apellido }}</td>
+              <td>{{ tabernero.edad }}</td>
+              <td>
+                {% if tabernero.edad > 50 %}
+                  Maestro Cervecero
+                {% elif tabernero.edad > 30 %}
+                  Chef Principal
+                {% else %}
+                  Cantinero
+                {% endif %}
+              </td>
+              <td>
+                <a href="{% url 'Taberna:detalle_taberneros' tabernero.id %}" class="btn btn-sm btn-informacion">Ver</a>
+                {% if user.is_authenticated %}
+                  <a href="{% url 'Taberna:actualizar_tabernero' tabernero.id %}" class="btn btn-sm btn-alerta">Editar</a>
+                  <a href="{% url 'Taberna:tabernero_confirm_delete' tabernero.id %}" class="btn btn-sm btn-peligro">Eliminar</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="5" class="text-center">No hay taberneros disponibles.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
-<div class="text-center mt-4">
-  <a href="{% url 'Taberna:crear_tabernero' %}" class="btn btn-success">
-    ➕ Agregar nuevo tabernero
-  </a>
-  <br>
-    <a href="{% url 'Taberna:home' %}">Volver al inicio</a>
-  <br>
+    <div class="text-center mt-4">
+      <a href="{% url 'Taberna:crear_tabernero' %}" class="btn btn-success me-2">
+        ➕ Agregar nuevo tabernero
+      </a>
+      <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">Volver al inicio</a>
+    </div>
 </div>
 {% endblock %}

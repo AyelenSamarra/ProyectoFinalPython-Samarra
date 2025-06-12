@@ -2,7 +2,7 @@ body {
     font-family: 'IM Fell English', serif;
     margin: 0;
     padding: 0;
-    background-image: url("../media/lions_pride_inn.jpg");
+    background-image: url("../media/lions_pride_inn.png");
     background-size: cover;     
     background-position: center; 
     background-repeat: no-repeat;
@@ -16,11 +16,6 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
-/*.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2em;
-}*/
 
 /* Encabezado principal */
 header {
@@ -40,19 +35,6 @@ header h1 {
     border-radius: 15px;
     display: inline-block;
 }
-
-/*header h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 4em;
-    margin: 0;
-    color: #fdf6e3;
-    text-shadow: 3px 3px 6px #2d1b05, -1px -1px 1px #d3b97a;
-    background-color: rgba(80, 53, 14, 0.6);
-    padding: 0.5em 1em;
-    border: 3px solid #d3b97a;
-    border-radius: 12px;
-    display: inline-block;
-}*/
 
 /* Barra superior */
 .top-bar {
@@ -146,24 +128,16 @@ a.button-link:hover {
     align-items: center;
 }
 
-/*.button-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    margin-top: 2em;
-    align-items: center;
-}*/
-
 a.taberneros {
-    background-color: #a87c4f;
-}
-
-a.clientes {
     background-color: #b28d5b;
 }
 
-a.productos {
+a.clientes {
     background-color: #c49b6b;
+}
+
+a.productos {
+    background-color: #a87c4f;
 }
 
 a.about {
@@ -197,11 +171,36 @@ header h1, h2, h3 {
     font-family: 'Uncial Antiqua', cursive;
 }
 
-/* Opcional: aplica también en botones */
+
 .button-link {
     font-family: 'Uncial Antiqua', cursive;
 }
 
 .bg-taberna {
     background-color: #50350e !important;
+}
+
+.table thead.bg-listas th {
+    background-color: #a87c4f !important;
+    color: #000 !important; /* para asegurar contraste */
+}
+
+.btn-informacion {
+    background-color: #dfb660 !important;
+    color: #a57b20;
+}
+
+.btn-alerta {
+    background-color: #daab55 !important;
+    color: #3e2f1c;
+}
+
+.btn-peligro {
+    background-color: #b38446 !important;
+    color: #fdf6e3;
+}
+
+.btn-edicion {
+    background-color: #e2a75a !important;
+    color: #fdf6e3;
 }

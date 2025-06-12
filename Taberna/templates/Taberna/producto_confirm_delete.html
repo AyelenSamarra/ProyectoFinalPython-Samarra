@@ -1,22 +1,17 @@
 {% extends "Taberna/base.html" %}
 
-{% block title %}
-    Eliminar
-{% endblock title %}
-
-{% block content_title %}
-    Eliminar Producto
-{% endblock content_title %}
+{% block title %}Eliminar{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2>¿Estás seguro de que quieres eliminar {{ producto.nombre }}?</h2>
-        <p>Esta acción no se puede deshacer.</p>
-
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Confirmar</button>
-            <a href="{% url 'Taberna:productos' %}" class="btn btn-secondary">Cancelar</a>
-        </form>
+<div class="container mt-5">
+  <h2 class="text-danger">¿Estás seguro de que quieres eliminar {{ producto.nombre }}?</h2>
+  <p class="text-dark">Esta acción no se puede deshacer.</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="d-flex justify-content-center gap-3 mt-3">
+      <button type="submit" class="btn btn-danger">Confirmar</button>
+      <a href="{% url 'Taberna:productos' %}" class="btn btn-secondary">Cancelar</a>
     </div>
-{% endblock content %}
+  </form>
+</div>
+{% endblock %}

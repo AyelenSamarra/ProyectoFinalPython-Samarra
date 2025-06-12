@@ -1,14 +1,13 @@
 {% extends "Taberna/base.html" %}
 
 {% block content %}
-  <ul>
-    <li>Nombre: {{ cliente_frecuente.nombre }}</li>
-    <li>Apellido: {{ cliente_frecuente.apellido }}</li>
-    <li>Pedido Favorito: {{ cliente_frecuente.pedido_favorito }}</li>
-    </li>
-    <div>
-      <a href="{% url 'Taberna:clientes_frecuentes' %}" class="button-link taberneros">Volver a los Clientes Frecuentes</a>
-    </div>
+  <ul class="list-group mb-3">
+    <li class="list-group-item">Nombre: {{ cliente_frecuente.nombre }}</li>
+    <li class="list-group-item">Apellido: {{ cliente_frecuente.apellido }}</li>
+    <li class="list-group-item">Pedido Favorito: {{ cliente_frecuente.pedido_favorito }}</li>
   </ul>
+  <div>
+    <a href="{% url 'Taberna:clientes_frecuentes' %}" class="btn btn-secondary">Volver a los Clientes Frecuentes</a>
+  </div>
 {% endblock %}
 

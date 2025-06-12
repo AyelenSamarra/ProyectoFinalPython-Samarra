@@ -1,29 +1,18 @@
 {% extends "Taberna/base.html" %}
 
 {% block content %}
-  <h2 style="font-size: 1.75em; font-weight: bold; color: #c49b6b; margin-bottom: 1em;">
-    Actualizar Producto
-  </h2>
-  <p style="color: #5b4a30; margin-bottom: 1.5em;">
-    Llena los datos para modificar la información del producto seleccionado.
-  </p>
+<div class="container mt-5">
+  <h2 class="text-warning">Actualizar Producto</h2>
+  <p class="text-light">Llena los datos para modificar la información del producto seleccionado.</p>
 
-  <form method="post" 
-        style="background-color: #927237; padding: 1.5em; border-radius: 8px; max-width: 400px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);">
+  <form method="post" class="bg-taberna text-white p-4 rounded shadow w-50 mx-auto">
     {% csrf_token %}
     {{ form.as_p }}
-    
-    <button type="submit" class="button-link taberneros" style="margin-top: 1em; width: 100%; font-weight: 700;">
-      Actualizar Producto
-    </button>
-  </form>
 
-  <p style="margin-top: 2em;">
-    <a href="{% url 'Taberna:productos' %}" 
-       style="color: #c49b6b; text-decoration: none; font-weight: 600;"
-       onmouseover="this.style.textDecoration='underline';"
-       onmouseout="this.style.textDecoration='none';">
-       Volver a la lista de productos
-    </a>
-  </p>
+    <div class="d-grid gap-2 mt-4">
+      <button type="submit" class="btn btn-edicion fw-bold">➕ Actualizar Producto</button>
+      <a href="{% url 'Taberna:productos' %}" class="btn btn-secondary fw-bold">⬅️ Volver al Menú</a>
+    </div>
+  </form>
+</div>
 {% endblock %}

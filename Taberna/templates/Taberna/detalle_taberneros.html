@@ -1,10 +1,10 @@
 {% extends "Taberna/base.html" %}
 
 {% block content %}
-  <ul>
-    <li>Nombre: {{ tabernero.nombre }}</li>
-    <li>Apellido: {{ tabernero.apellido }}</li>
-    <li>Edad: {{ tabernero.edad }}</li>
+  <ul class="list-group mb-3">
+    <li class="list-group-item">Nombre: {{ tabernero.nombre }}</li>
+    <li class="list-group-item">Apellido: {{ tabernero.apellido }}</li>
+    <li class="list-group-item">Edad: {{ tabernero.edad}}</li>
     <li>Especialidad: 
       {% if tabernero.edad > 50 %}
         Maestro Cervecero
@@ -13,10 +13,8 @@
       {% else %}
         Cantinero
       {% endif %}
-    </li>
-    <div>
-      <a href="{% url 'Taberna:taberneros' %}" class="button-link taberneros">Volver a los Taberneros</a>
-    </div>
   </ul>
+  <div>
+    <a href="{% url 'Taberna:taberneros' %}" class="btn btn-secondary">Volver a los Taberneros</a>
+  </div>
 {% endblock %}
-

@@ -1,23 +1,18 @@
 {% extends "Taberna/base.html" %}
 
 {% block content %}
-  <h2 class="text-2xl font-bold text-yellow-300 mb-4">🍺 Actualizar Cliente Frecuente</h2>
-  <p class="text-white mb-6">Llena los datos para actualizar la información de nuestro cliente.</p>
+<div class="container mt-5">
+  <h2 class="text-warning">🍺 Actualizar Cliente Frecuente</h2>
+  <p class="text-light">Llena los datos para actualizar la información de nuestro cliente.</p>
 
-  <form method="post" class="bg-gray-800 p-6 rounded-lg max-w-md">
+  <form method="post" class="bg-taberna text-white p-4 rounded shadow w-50 mx-auto">
     {% csrf_token %}
     {{ form.as_p }}
 
-    <div style="display: flex; flex-direction: column; gap: 1em; margin-top: 2em; max-width: 300px;">
-      <button type="submit"
-              style="padding: 1em; background-color: #b5854a; color: white; border: none; border-radius: 8px; text-align: center; font-weight: bold; cursor: pointer;">
-        ➕ Actualizar Cliente Frecuente
-      </button>
-
-      <a href="{% url 'Taberna:clientes_frecuentes' %}" 
-         style="padding: 1em; background-color: #a9733d; color: white; border: none; border-radius: 8px; text-align: center; text-decoration: none; font-weight: bold;">
-        ⬅️ Volver a la Lista de Clientes
-      </a>
+    <div class="d-grid gap-2 mt-4">
+      <button type="submit" class="btn btn-edicion fw-bold">➕ Actualizar Cliente Frecuente</button>
+      <a href="{% url 'Taberna:clientes_frecuentes' %}" class="btn btn-secondary fw-bold">⬅️ Volver a la Lista de Clientes</a>
     </div>
   </form>
+</div>
 {% endblock %}

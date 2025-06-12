@@ -1,18 +1,25 @@
 {% extends "Taberna/base.html" %}
 
-{% block title %}
-    Iniciar Sesión
-{% endblock title %}
+{% block title %}Iniciar Sesión{% endblock %}
 
 {% block content %}
-    <h2>🍺 Bienvenido de nuevo, aventurero</h2>
-    <form method="post" style="margin-top: 1.5em;">
+<div class="container mt-5">
+    <h2 class="mb-4">🍺 Bienvenido de nuevo, aventurero</h2>
+    <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-
-        <div class="button-container">
-            <input type="submit" value="Iniciar Sesión" class="button-link taberneros"/>
-            <a href="{% url 'Taberna:home' %}" class="button-link clientes">🏠 Volver al Inicio</a>
+        {% for field in form %}
+          <div class="mb-3">
+              {{ field.label_tag }}
+              {{ field }}
+              {% if field.errors %}
+                <div class="text-danger">{{ field.errors }}</div>
+              {% endif %}
+          </div>
+        {% endfor %}
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">🏠 Volver al Inicio</a>
         </div>
     </form>
-{% endblock content %}
+</div>
+{% endblock %}

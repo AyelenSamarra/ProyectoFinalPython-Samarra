@@ -3,13 +3,16 @@
 {% block title %}Acerca de mí{% endblock %}
 
 {% block content %}
-<h2>Sobre el creador de la taberna</h2>
-<p>Hola, soy el creador de este sitio inspirado en el universo de fantasía de World of Warcraft. Esta taberna digital busca capturar la atmósfera cálida y mágica del Lion’s Pride Inn, donde cada visitante es bienvenido a quedarse, explorar y descubrir.</p>
-<p>Espero que disfrutes tu estadía tanto como yo disfruté construyéndola. ¡Salud, aventurero!</p>
-
-<div class="text-center mt-4">
-  <a href="{% url 'Taberna:home' %}" class="btn btn-success">
-    Volver al inicio
-  </a>
+<div class="container mt-5">
+  <h2 class="text-center text-warning mb-4">Sobre el creador de la taberna</h2>
+  <p class="lead text-dark">
+    Hola, soy el creador de este sitio inspirado en el universo de fantasía de World of Warcraft. Esta taberna digital busca capturar la atmósfera cálida y mágica del Lion’s Pride Inn, donde cada visitante es bienvenido a quedarse, explorar y descubrir.
+  </p>
+  <p class="text-dark">
+    Espero que disfrutes tu estadía tanto como yo disfruté construyéndola. ¡Salud, aventurero!
+  </p>
+  <div class="text-center mt-4">
+    <a href="{% url 'Taberna:home' %}" class="btn btn-success">Volver al inicio</a>
+  </div>
 </div>
 {% endblock %}
