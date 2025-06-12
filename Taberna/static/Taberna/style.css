@@ -1,0 +1,207 @@
+body {
+    font-family: 'IM Fell English', serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("../media/lions_pride_inn.jpg");
+    background-size: cover;     
+    background-position: center; 
+    background-repeat: no-repeat;
+    height: 100vh;      
+}
+
+.container {
+    background-color: rgba(255, 248, 220, 0.85); 
+    border-radius: 15px;
+    padding: 2em;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/*.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2em;
+}*/
+
+/* Encabezado principal */
+header {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+header h1 {
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 4em;
+    margin: 0 auto;
+    color: #fdf6e3;
+    text-shadow: 3px 3px 6px #2d1b05, -1px -1px 1px #d3b97a;
+    background-color: rgba(80, 53, 14, 0.6);
+    padding: 0.5em 1.2em;
+    border: 4px double #d3b97a;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+/*header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 4em;
+    margin: 0;
+    color: #fdf6e3;
+    text-shadow: 3px 3px 6px #2d1b05, -1px -1px 1px #d3b97a;
+    background-color: rgba(80, 53, 14, 0.6);
+    padding: 0.5em 1em;
+    border: 3px solid #d3b97a;
+    border-radius: 12px;
+    display: inline-block;
+}*/
+
+/* Barra superior */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #6e4b1a;
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.top-bar .left {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2em;
+}
+
+.top-bar .right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.top-bar a.btn {
+    background-color: #d3b97a;
+    color: #3e2f1c;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Cinzel', serif;
+    transition: background-color 0.3s ease;
+}
+
+.top-bar a.btn:hover {
+    background-color: #e5c88c;
+}
+
+.top-bar img {
+    border-radius: 50%;
+    border: 2px solid #d3b97a;
+    width: 40px;
+    height: 40px;
+}
+
+/* Botones principales */
+a.button-link {
+    display: inline-block;
+    padding: 1em;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 1em;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease;
+    font-size: 1.1em;
+    user-select: none;
+    font-family: 'Cinzel', serif;
+}
+
+a.button-link:hover {
+    filter: brightness(110%);
+}
+
+.carta-taberna {
+    background-color: rgba(255, 248, 220, 0.85);
+    border: 5px solid #7a5c35;
+    border-radius: 20px;
+    padding: 2em;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    backdrop-filter: blur(2px);
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+/*.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-top: 2em;
+    align-items: center;
+}*/
+
+a.taberneros {
+    background-color: #a87c4f;
+}
+
+a.clientes {
+    background-color: #b28d5b;
+}
+
+a.productos {
+    background-color: #c49b6b;
+}
+
+a.about {
+    background-color: #d8ac79;
+}
+
+/* Contenido */
+main {
+    line-height: 1.7;
+    font-size: 1.1em;
+}
+
+h2, h3 {
+    font-family: 'Cinzel', serif;
+    color: #4e3311;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+/* Fuente rúnica/medieval para títulos y elementos destacados */
+.rune-font {
+    font-family: 'Uncial Antiqua', cursive;
+    letter-spacing: 0.05em;
+    text-shadow: 1px 1px 2px #d3b97a;
+}
+
+/* Aplica en los encabezados principales automáticamente */
+header h1, h2, h3 {
+    font-family: 'Uncial Antiqua', cursive;
+}
+
+/* Opcional: aplica también en botones */
+.button-link {
+    font-family: 'Uncial Antiqua', cursive;
+}
+
+.bg-taberna {
+    background-color: #50350e !important;
+}
