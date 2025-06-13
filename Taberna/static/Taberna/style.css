@@ -154,7 +154,7 @@ main {
     font-size: 1.1em;
 }
 
-h2, h3, h4 {
+h1, h2, h3, h4 {
     font-family: 'Cinzel', serif;
     color: #4e3311;
 }
@@ -211,5 +211,10 @@ header h1, h2, h3, h4 {
 
 .btn-tabern {
     background-color: #50350e !important;
+    color: #fdf6e3;
+}
+
+.btn-taberna {
+    background-color: #a36816 !important;
     color: #fdf6e3;
 }

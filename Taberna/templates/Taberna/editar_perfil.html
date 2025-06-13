@@ -1,11 +1,11 @@
 {% extends "Taberna/base.html" %}
 
-{% block title %}
-<h2 class="mb-4">✏️ Cambio de identidad, ¿eh?</h2>
-{% endblock %}
+{% block title %}Editar Perfil{% endblock  %}
 
 {% block content %}
+
 <div class="container mt-5">
+    <h2 class="text-center mb-4">✏️ Cambio de identidad, ¿eh?</h2>
     <form method="post" class="bg-taberna text-white p-4 rounded shadow w-50 mx-auto" style="max-width: 500px;">
         {% csrf_token %}
         {% for field in form %}

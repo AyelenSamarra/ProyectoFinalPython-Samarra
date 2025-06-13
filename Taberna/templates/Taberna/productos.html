@@ -5,15 +5,15 @@
 
 {% block content %}
 <div class="container mt-5">
-    <!-- <h2 class="mb-4 text-center" style="font-family: 'Uncial Antiqua', cursive;">🍖 Menú</h2>-->
+    <h2 class="mb-4 text-center">🍖 Menú</h2>
     
     <!-- Filtros por categoría -->
     <div class="text-center mb-4">
         <div class="btn-group" role="group">
-            <a href="?categoria=todos" class="btn btn-taberna">Todos</a>
-            <a href="?categoria=comida" class="btn btn-taberna">🍗 Comidas</a>
-            <a href="?categoria=bebida" class="btn btn-taberna">🍺 Bebidas</a>
-            <a href="?categoria=postre" class="btn btn-taberna">🍰 Postres</a>
+            <a href="?categoria=todos" class="btn btn-taberna text-white">Todos</a>
+            <a href="?categoria=comida" class="btn btn-taberna text-white">🍗 Comidas</a>
+            <a href="?categoria=bebida" class="btn btn-taberna text-white">🍺 Bebidas</a>
+            <a href="?categoria=postre" class="btn btn-taberna text-white">🍰 Postres</a>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
                        name="busqueda" 
                        placeholder="Buscar productos por nombre..." 
                        value="{{ request.GET.busqueda }}">
-                <button class="btn btn-taberna" type="submit">
+                <button class="btn btn-taberna text-white" type="submit">
                     🔍 Buscar
                 </button>
                 {% if request.GET.busqueda %}

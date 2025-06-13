@@ -1,21 +1,16 @@
 {% extends "Taberna/base.html" %}
 
 {% block title %}
-  <h1 class="mb-4 text-center text-success">Perfil de {{ user.username }}</h1>
+Perfil de {{ user.username }}
 {% endblock title %}
 
 {% block content %}
 <div class="container mt-5">
+  <h1 class="mb-4 text-center">Perfil de {{ user.username }}</h1>
   <h2 class="text-warning">Información del Usuario</h2>
   <div class="bg-taberna text-white p-4 rounded shadow w-50 mx-auto">
     <p><strong>Nombre de Usuario:</strong> {{ user.username }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Avatar:</strong></p>
-    {% if user.profile.avatar %}
-      <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;">
-    {% else %}
-      <p>No hay avatar disponible.</p>
-    {% endif %}
     <p><strong>Biografía:</strong> {{ user.profile.biografia }}</p>
     <p><strong>Fecha de Nacimiento:</strong> {{ user.profile.fecha_nacimiento|date:"d/m/Y" }}</p>
 
