@@ -218,3 +218,42 @@ header h1, h2, h3, h4 {
     background-color: #a36816 !important;
     color: #fdf6e3;
 }
+
+.bg-login {
+    background-color: #dd7937 !important;
+    color: #fdf6e3;
+}
+
+.form-group.row {
+    display: flex;
+    align-items: center;
+}
+
+.col-sm-4 {
+    padding-right: 15px;
+    text-align: right;
+}
+
+.col-sm-8 input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.col-sm-8 .form-control {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.bio-textarea {
+    width: 100%;
+    min-height: 100px; /* Adjust this value for desired height */
+    resize: vertical; /* Allows vertical resizing if needed */
+}
+
+.btn-warning {
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}

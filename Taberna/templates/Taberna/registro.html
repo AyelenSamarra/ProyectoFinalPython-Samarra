@@ -5,18 +5,22 @@
 {% block content %}
 <div class="container mt-5">
     <h2 class="mb-4">🛡️ Registra tu nombre en los libros de la taberna</h2>
-    <form method="post">
+    <form method="post" class="bg-login text-white p-4 rounded shadow w-50 mx-auto">
         {% csrf_token %}
         {% for field in form %}
           <div class="mb-3">
-              {{ field.label_tag }}
-              {{ field }}
-              {% if field.errors %}
-                <div class="text-danger">{{ field.errors }}</div>
-              {% endif %}
+              <div class="form-group row">
+                  <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label text-right">{{ field.label }}</label>
+                  <div class="col-sm-8">
+                      {{ field }}
+                      {% if field.errors %}
+                        <div class="text-danger">{{ field.errors }}</div>
+                      {% endif %}
+                  </div>
+              </div>
           </div>
         {% endfor %}
-        <div class="d-flex gap-2">
+        <div class="d-flex justify-content-center gap-2 mt-4">
             <button type="submit" class="btn btn-success">Registrarse</button>
             <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">🏠 Volver al Inicio</a>
         </div>
