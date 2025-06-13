@@ -20,10 +20,12 @@
         </div>
       </div>
     {% endfor %}
-
-  <div class="text-center mt-4">
-    <a href="{% url 'Taberna:clientes_frecuentes' %}" class="btn btn-alerta">Volver a la lista</a>
-    <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">Volver al inicio</a>
-  </div>
+    <div class="d-grid gap-2 mt-4">
+      <button type="submit" class="btn btn-edicion fw-bold">➕ Crear Cliente Frecuente</button>
+      <a href="{% url 'Taberna:clientes_frecuentes' %}" class="btn btn-alerta">Volver a la lista</a>
+  </form>
+    </div>
 </div>
+</div>
+
 {% endblock %}
