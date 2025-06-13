@@ -38,10 +38,12 @@
     </table>
   </div>
 
-  <div class="text-center mt-4">
-      <a href="{% url 'Taberna:crear_cliente_frecuente' %}" class="btn btn-success me-2">
-        ➕ Agregar nuevo cliente frecuente
-      </a>
+  {% if user.is_authenticated %}
+    <div class="text-center mt-4">
+        <a href="{% url 'Taberna:crear_cliente_frecuente' %}" class="btn btn-success me-2">
+          ➕ Agregar nuevo cliente frecuente
+        </a>
+  {% endif %}
       <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">Volver al inicio</a>
     </div>
 </div>

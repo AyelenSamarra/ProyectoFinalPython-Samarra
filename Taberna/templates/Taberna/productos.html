@@ -1,46 +1,124 @@
 {% extends "Taberna/base.html" %}
+{% load static %}
+
+{% block title %}🍖 Menú{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="mb-4">Menú de Productos</h2>
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped table-hover align-middle">
-        <thead class="bg-listas text-white">
-          <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for producto in productos %}
-            <tr>
-              <td>{{ producto.nombre }}</td>
-              <td>${{ producto.precio }}</td>
-              <td>{{ producto.stock }}</td>
-              <td>
-                <a href="{% url 'Taberna:detalle_productos' producto.id %}" class="btn btn-sm btn-informacion">Ver</a>
-                {% if user.is_authenticated %}
-                  <a href="{% url 'Taberna:actualizar_producto' producto.id %}" class="btn btn-sm btn-alerta">Editar</a>
-                  <a href="{% url 'Taberna:producto_confirm_delete' producto.id %}" class="btn btn-sm btn-peligro">Eliminar</a>
-                {% endif %}
-              </td>
-            </tr>
-          {% empty %}
-            <tr>
-              <td colspan="4" class="text-center">No hay productos disponibles.</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <!-- <h2 class="mb-4 text-center" style="font-family: 'Uncial Antiqua', cursive;">🍖 Menú</h2>-->
+    
+    <!-- Filtros por categoría -->
+    <div class="text-center mb-4">
+        <div class="btn-group" role="group">
+            <a href="?categoria=todos" class="btn btn-taberna">Todos</a>
+            <a href="?categoria=comida" class="btn btn-taberna">🍗 Comidas</a>
+            <a href="?categoria=bebida" class="btn btn-taberna">🍺 Bebidas</a>
+            <a href="?categoria=postre" class="btn btn-taberna">🍰 Postres</a>
+        </div>
     </div>
 
-    <div class="text-center mt-4">
-      <a href="{% url 'Taberna:crear_producto' %}" class="btn btn-success me-2">
-        ➕ Agregar nuevo producto
-      </a>
-      <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">Volver al inicio</a>
+    <!-- Barra de búsqueda -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-8">
+            <form method="get" action="{% url 'Taberna:productos' %}" class="input-group">
+                <input type="text" 
+                       class="form-control" 
+                       name="busqueda" 
+                       placeholder="Buscar productos por nombre..." 
+                       value="{{ request.GET.busqueda }}">
+                <button class="btn btn-taberna" type="submit">
+                    🔍 Buscar
+                </button>
+                {% if request.GET.busqueda %}
+                <a href="{% url 'Taberna:productos' %}" class="btn btn-outline-secondary">
+                    Limpiar
+                </a>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+        <!-- Mensaje de resultados -->
+    {% if request.GET.busqueda %}
+    <div class="alert alert-info text-center">
+        Mostrando resultados para: <strong>"{{ request.GET.busqueda }}"</strong>
+        <a href="{% url 'Taberna:productos' %}" class="ms-2">(Mostrar todos)</a>
+    </div>
+    {% endif %}
+
+    <!-- Listado de productos en cards -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for producto in productos %}
+        <div class="col">
+            <div class="card h-100 border-taberna shadow">
+                {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}" style="height: 200px; object-fit: cover;">
+                {% else %}
+                <img src="{% static '/media/default_food.jpeg' %}" class="card-img-top" alt="Imagen por defecto" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="card-title" style="font-family: 'Cinzel', serif;">{{ producto.nombre }}</h5>
+                        <span class="badge bg-taberna">{{ producto.get_categoria_display }}</span>
+                    </div>
+                    
+                    <p class="card-text text-muted mt-2">
+                        {% if producto.descripcion|striptags|wordcount > 15 %}
+                            {{ producto.descripcion|striptags|truncatewords:15 }}...
+                        {% else %}
+                            {{ producto.descripcion|striptags }}
+                        {% endif %}
+                    </p>
+                </div>
+                
+                <div class="card-footer bg-transparent border-taberna">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h5 mb-0" style="color: #8B4513;">${{ producto.precio }}</span>
+                        
+                        <div class="btn-group">
+                            <a href="{% url 'Taberna:detalle_productos' producto.id %}" class="btn btn-sm btn-taberna">
+                                Ver más
+                            </a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'Taberna:actualizar_producto' producto.id %}" class="btn btn-sm btn-outline-taberna">
+                                ✏️
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    {% if producto.es_destacado %}
+                    <div class="text-end mt-2">
+                        <span class="badge bg-gold">⭐ Destacado</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center">
+                <h4 class="alert-heading">¡El barril está vacío!</h4>
+                <p>No hay productos disponibles en el menú.</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="text-center mt-5">
+      {% if user.is_authenticated %}
+        <div class="text-center mt-4">
+          <a href="{% url 'Taberna:crear_producto' %}" class="btn btn-success me-2">
+            ➕ Agregar nuevo producto
+          </a>
+      {% endif %}
+        <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">
+            🏠 Volver a la taberna
+        </a>
     </div>
 </div>
+
 {% endblock %}
+

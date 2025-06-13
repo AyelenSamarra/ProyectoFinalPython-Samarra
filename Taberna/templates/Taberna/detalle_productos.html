@@ -6,8 +6,17 @@
     <li class="list-group-item">Precio: {{ producto.precio }}</li>
     <li class="list-group-item">Stock: {{ producto.stock }}</li>
   </ul>
-  <div>
-    <a href="{% url 'Taberna:productos' %}" class="btn btn-secondary">Volver al Menú</a>
+
+    <div class="container mt-5">
+      <h2 class="mb-4">Descripción del Producto</h2>
+      <p class="lead">{{ producto.descripcion }}</p>
+      <div class="d-grid gap-2 mt-4">
+        <a href="{% url 'Taberna:actualizar_producto' producto.id %}" class="btn btn-warning">Actualizar Producto</a>
+        <a href="{% url 'Taberna:producto_confirm_delete' producto.id %}" class="btn btn-danger">Eliminar Producto</a>
+      </div>
+    </div>
+  <div class="text-center mt-4">
+    <a href="{% url 'Taberna:productos' %}" class="btn btn-secondary">Volver a la lista</a>
   </div>
 {% endblock %}
 

@@ -5,14 +5,16 @@
 {% block content %}
 <div class="container mt-5">
   <h2 class="text-warning">Crear Producto</h2>
-  <form method="post" class="bg-dark p-4 rounded shadow w-50 mx-auto">
+  <form method="post" class="bg-taberna text-white p-4 rounded shadow w-50 mx-auto">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary w-100">Crear Producto</button>
-  </form>
+    <div class="d-grid gap-2 mt-4">
+    <button type="submit" class="btn btn-success w-100">Crear Producto</button>
+    </div>
+    </form>
 
   <div class="text-center mt-4">
-    <a href="{% url 'Taberna:productos' %}" class="btn btn-outline-warning">Volver a la lista</a>
+    <a href="{% url 'Taberna:productos' %}" class="btn btn-alerta">Volver a la lista</a>
     <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">Volver al inicio</a>
   </div>
 </div>

@@ -98,7 +98,7 @@ class ClienteFrecuenteDeleteView(LoginRequiredMixin, DeleteView):
 
 class ProductoCreateView(LoginRequiredMixin, CreateView):
     model = Producto
-    fields = ["nombre", "precio", "stock"]
+    fields = ["nombre", "precio", "stock", "descripcion", "imagen", "categoria"]
     template_name = 'Taberna/crear_producto.html'
     success_url = reverse_lazy('Taberna:productos')
 
@@ -109,19 +109,30 @@ class ProductoListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        busqueda = self.request.GET.get('busqueda', None)
+        
+        # Get search term and category from URL parameters
+        busqueda = self.request.GET.get('busqueda')
+        categoria = self.request.GET.get('categoria')
+        
+        # Apply search filter if term exists
         if busqueda:
             queryset = queryset.filter(nombre__icontains=busqueda)
-        return queryset
+        
+        # Apply category filter if specified and not 'todos'
+        if categoria and categoria != 'todos':
+            queryset = queryset.filter(categoria=categoria)
+        
+        return queryset.order_by('nombre')  # Or your preferred ordering
 
 class ProductoDetailView(DetailView):
     model = Producto
+    fields = ["nombre", "precio", "stock", "descripcion", "imagen", "categoria"]
     template_name = 'Taberna/detalle_productos.html'
     context_object_name = 'producto'
 
 class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     model = Producto
-    fields = ["nombre", "precio", "stock"]
+    fields = ["nombre", "precio", "stock", "descripcion", "imagen", "categoria"]
     template_name = 'Taberna/actualizar_producto.html'
     success_url = reverse_lazy('Taberna:productos')
 
