@@ -42,6 +42,8 @@ class ProductoForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100, label='Nombre del Producto', required=True)
     precio = forms.CharField(max_length=100, label='Precio del Producto', required=True)
     stock = forms.IntegerField(label='Stock del Producto', required=True)
+    imagen = forms.ImageField(label='Foto del Producto', required=False)
+    descripcion = forms.CharField(widget=forms.Textarea, label='Descripción detallada', required=False)
 
     class Meta:
         model = Producto

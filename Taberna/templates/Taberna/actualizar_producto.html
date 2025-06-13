@@ -5,7 +5,7 @@
   <h2 class="text-warning">Actualizar Producto</h2>
   <p class="text-light">Llena los datos para modificar la información del producto seleccionado.</p>
 
-  <form method="post" class="bg-taberna text-white p-4 rounded shadow w-50 mx-auto">
+  <form method="post" class="bg-taberna text-white p-4 rounded shadow w-50 mx-auto" enctype="multipart/form-data">
     {% csrf_token %}
     {% for field in form %}
       <div class="mb-3">
@@ -14,11 +14,16 @@
           <div class="col-sm-8">
             {% if field.name == 'descripcion' %}
               <textarea name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control bio-textarea" rows="4">{{ field.value|default:"" }}</textarea>
+            {% elif field.name == 'imagen' %}
+              {{ field }}
+              {% if field.value %}
+                <p class="text-light mt-1">Imagen actual: {{ field.value.url }}</p>
+              {% endif %}
             {% else %}
-            {{ field }}
+              {{ field }}
+            {% endif %}
             {% if field.errors %}
               <div class="text-danger mt-1">{{ field.errors }}</div>
-            {% endif %}
             {% endif %}
           </div>
         </div>

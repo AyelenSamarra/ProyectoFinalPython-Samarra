@@ -156,9 +156,10 @@ class ProductoDetailView(DetailView):
 
 class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     model = Producto
-    fields = ["nombre", "precio", "stock", "descripcion", "imagen", "categoria"]
+    form_class = ProductoForm
     template_name = 'Taberna/actualizar_producto.html'
     success_url = reverse_lazy('Taberna:productos')
+
 
 class ProductoDeleteView(LoginRequiredMixin, DeleteView):
     model = Producto

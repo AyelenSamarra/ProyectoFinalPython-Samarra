@@ -114,7 +114,10 @@ class User(AbstractUser):
     class Meta:
         db_table = 'Taberna_user'
     
-    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']  # Standard Django fields
+    REQUIRED_FIELDS = ['email']
+    
+    def get_short_name(self):
+        return self.nombre or self.username 
     
 class Avatar(models.Model):
     imagen = models.ImageField(upload_to="avatares") 
