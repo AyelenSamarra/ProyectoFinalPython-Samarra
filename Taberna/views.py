@@ -122,7 +122,7 @@ class ClienteFrecuenteDeleteView(LoginRequiredMixin, DeleteView):
 
 class ProductoCreateView(LoginRequiredMixin, CreateView):
     model = Producto
-    fields = ["nombre", "precio", "stock", "descripcion", "imagen", "categoria"]
+    form_class = ProductoForm  # <- ahora usa tu formulario
     template_name = 'Taberna/crear_producto.html'
     success_url = reverse_lazy('Taberna:productos')
 

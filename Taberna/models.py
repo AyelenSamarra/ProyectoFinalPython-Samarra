@@ -68,7 +68,6 @@ class Producto(models.Model):
     descripcion = RichTextField(
         verbose_name="Descripción detallada",
         blank=True,
-        help_text="Ingredientes, preparación, maridaje..."
     )
     # Campo de imagen
     imagen = models.ImageField(

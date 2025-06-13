@@ -1,7 +1,7 @@
 from datetime import timezone, datetime
 from django import forms
 from django.contrib.auth.forms  import UserCreationForm, PasswordChangeForm
-from .models import User, Avatar
+from .models import *
 from django.contrib.auth.forms import UserChangeForm
 from django.urls import reverse_lazy
 
@@ -42,6 +42,11 @@ class ProductoForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100, label='Nombre del Producto', required=True)
     precio = forms.CharField(max_length=100, label='Precio del Producto', required=True)
     stock = forms.IntegerField(label='Stock del Producto', required=True)
+
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'precio', 'stock', 'categoria', 'imagen', 'descripcion']
+
 
 
 class BuscarProductoForm(forms.Form):

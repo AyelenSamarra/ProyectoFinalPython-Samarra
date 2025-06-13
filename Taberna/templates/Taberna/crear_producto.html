@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container mt-5">
   <h2 class="text-warning">Crear Producto</h2>
-  <form method="post" class="bg-taberna text-white p-4 rounded shadow w-50 mx-auto">
+  <form method="post" enctype="multipart/form-data" class="bg-taberna text-white p-4 rounded shadow w-50 mx-auto">
     {% csrf_token %}
     {{ form.as_p }}
     <div class="d-grid gap-2 mt-4">
