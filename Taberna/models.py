@@ -10,6 +10,10 @@ class Tabernero(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     edad = models.IntegerField()
+    descripcion = models.TextField(
+        verbose_name="Descripción del tabernero",
+        default="Tabernero experimentado en la cocina y el servicio al cliente.",
+    )
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
@@ -18,6 +22,19 @@ class ClienteFrecuente(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     pedido_favorito = models.CharField(max_length=100)
+    estado = models.CharField(
+        max_length=1,
+        choices=[
+            ('A', 'Avistado'),
+            ('D', 'Desaparecido'),
+        ],
+        default='A',  # Default to 'Avistado'
+        verbose_name="Estado del cliente"
+    )
+    descripcion = models.TextField(
+        verbose_name="Descripción del cliente",
+        default="Cliente frecuente que disfruta de nuestros platos y bebidas.",
+    )                                             
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"

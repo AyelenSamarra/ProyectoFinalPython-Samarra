@@ -9,12 +9,33 @@ class TaberneroForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100, label='Nombre del Tabernero', required=True)
     apellido = forms.CharField(max_length=100, label='Apellido del Tabernero', required=True)
     edad = forms.IntegerField(label='Edad del Tabernero', required=True)
+    descripcion = forms.CharField(
+        widget=forms.Textarea,
+        label='Descripción del Tabernero',
+        required=True,
+        max_length=500
+    )
 
 
 class ClienteFrecuenteForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100, label='Nombre del Cliente', required=True)
     apellido = forms.CharField(max_length=100, label='Apellido del Cliente', required=True)
     pedido_favorito = forms.CharField(max_length=100, label='Pedido Favorito', required=True)
+    estado = forms.ChoiceField(
+        choices=[
+            ('A', 'Avistado'),
+            ('D', 'Desaparecido'),
+        ],
+        label='Estado del Cliente',
+        required=True,
+        initial='A'  # Default to 'Avistado'
+    )
+    descripcion = forms.CharField(
+        widget=forms.Textarea,
+        label='Descripción del Cliente',
+        required=True,
+        max_length=500
+    )
 
 
 class ProductoForm(forms.ModelForm):

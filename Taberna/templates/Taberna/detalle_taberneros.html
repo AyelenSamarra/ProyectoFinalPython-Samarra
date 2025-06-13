@@ -5,7 +5,7 @@
     <li class="list-group-item">Nombre: {{ tabernero.nombre }}</li>
     <li class="list-group-item">Apellido: {{ tabernero.apellido }}</li>
     <li class="list-group-item">Edad: {{ tabernero.edad}}</li>
-    <li>Especialidad: 
+    <li class="list-group-item"> Especialidad: 
       {% if tabernero.edad > 50 %}
         Maestro Cervecero
       {% elif tabernero.edad > 30 %}
@@ -13,6 +13,9 @@
       {% else %}
         Cantinero
       {% endif %}
+    </li>
+    <h3 class="mt-4">Un poco de informacion</h3>
+    <li class="list-group-item">{{ tabernero.descripcion}}</li>
   </ul>
   <div>
     <a href="{% url 'Taberna:taberneros' %}" class="btn btn-secondary">Volver a los Taberneros</a>

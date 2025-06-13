@@ -5,6 +5,8 @@
     <li class="list-group-item">Nombre: {{ cliente_frecuente.nombre }}</li>
     <li class="list-group-item">Apellido: {{ cliente_frecuente.apellido }}</li>
     <li class="list-group-item">Pedido Favorito: {{ cliente_frecuente.pedido_favorito }}</li>
+    <h3 class="mt-4">Un poco de informacion</h3>
+    <li class="list-group-item">{{ cliente_frecuente.descripcion}}</li>
   </ul>
   <div>
     <a href="{% url 'Taberna:clientes_frecuentes' %}" class="btn btn-secondary">Volver a los Clientes Frecuentes</a>

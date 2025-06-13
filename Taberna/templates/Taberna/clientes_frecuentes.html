@@ -20,7 +20,7 @@
             <td>{{ cliente.nombre }}</td>
             <td>{{ cliente.apellido }}</td>
             <td>{{ cliente.pedido_favorito }}</td>
-            <td>{% if post.estado == "D" %}No avistado hace tiempo{% else %}Aparentemente Vivo{% endif %}</td>
+            <td>{% if cliente.estado == "D" %}No avistado hace tiempo{% else %}Aparentemente Vivo{% endif %}</td>
             <td>
               <a href="{% url 'Taberna:detalle_clientes_frecuentes' cliente.id %}" class="btn btn-informacion btn-sm">Ver</a>
               {% if user.is_authenticated %}

@@ -69,7 +69,7 @@ class TaberneroDetailView(DetailView):
 
 class TaberneroUpdateView(LoginRequiredMixin, UpdateView):
     model = Tabernero
-    fields = ["nombre", "apellido", "edad"]
+    fields = ["nombre", "apellido", "edad", "descripcion"]
     template_name = 'Taberna/actualizar_tabernero.html'
     success_url = reverse_lazy('Taberna:taberneros')
 
@@ -85,7 +85,7 @@ class TaberneroDeleteView(LoginRequiredMixin, DeleteView):
 
 class ClienteFrecuenteCreateView(LoginRequiredMixin, CreateView):
     model = ClienteFrecuente
-    fields = ["nombre", "apellido", "pedido_favorito"]
+    fields = ["nombre", "apellido", "pedido_favorito", "estado"]
     template_name = 'Taberna/crear_cliente_frecuente.html'
     success_url = reverse_lazy('Taberna:clientes_frecuentes')
 
@@ -108,7 +108,7 @@ class ClienteFrecuenteDetailView(DetailView):
 
 class ClienteFrecuenteUpdateView(LoginRequiredMixin, UpdateView):
     model = ClienteFrecuente
-    fields = ["nombre", "apellido", "pedido_favorito"]
+    fields = ["nombre", "apellido", "pedido_favorito", "estado"]
     template_name = 'Taberna/actualizar_cliente_frecuente.html'
     success_url = reverse_lazy('Taberna:clientes_frecuentes')
 
