@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container mt-5">
-  <h2 class="text-danger">¿Estás seguro de que quieres eliminar a {{ cliente.nombre }} {{ cliente.apellido }}?</h2>
+  <h2 class="text-danger">¿Estás seguro de que quieres eliminar a {{ clientefrecuente.nombre }} {{ clientefrecuente.apellido }}?</h2>
   <p class="text-dark">Esta acción no se puede deshacer.</p>
   <form method="post">
     {% csrf_token %}
