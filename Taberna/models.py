@@ -1,8 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from django.utils import timezone
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 
 class Tabernero(models.Model):
     nombre = models.CharField(max_length=100)
@@ -77,15 +79,26 @@ class Producto(models.Model):
         ordering = ['-fecha_creacion']
     
 
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    biografia = models.TextField(blank=True, null=True)
+    fecha_nacimiento = models.DateField(blank=True, null=True)
+    avatar = models.ImageField(upload_to="avatares", blank=True, null=True)
 
+    def __str__(self):
+        return f"Perfil de {self.user.username}"
 
 class User(AbstractUser):
-    def __str__(self):
-        return self.username
-
+    # Add your custom fields
+    nombre = models.CharField(max_length=100, blank=True, null=True)
+    apellido = models.CharField(max_length=100, blank=True, null=True)
+    biografia = models.TextField(blank=True, null=True)
+    fecha_nacimiento = models.DateField(blank=True, null=True)
+    
     class Meta:
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        db_table = 'Taberna_user'
+    
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']  # Standard Django fields
     
 class Avatar(models.Model):
     imagen = models.ImageField(upload_to="avatares") 
@@ -93,4 +106,17 @@ class Avatar(models.Model):
 
     def __str__(self):
         return f"{self.user} {self.imagen}"
- 
+    
+class Comentario(models.Model):
+    nombre = models.CharField(max_length=100)
+    email = models.EmailField()
+    mensaje = models.TextField()
+    fecha_creacion = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Contacto de {self.nombre} - {self.email}"
+    
+    class Meta:
+        verbose_name = "Mensaje de contacto"
+        verbose_name_plural = "Mensajes de contacto"
+        ordering = ['-fecha_creacion']

@@ -5,6 +5,8 @@ from Taberna.models import User
 
 admin.site.register(Tabernero)
 admin.site.register(ClienteFrecuente)
+admin.site.register(User)
+admin.site.register(Avatar)
 
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):

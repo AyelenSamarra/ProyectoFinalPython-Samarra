@@ -1,3 +1,4 @@
+from datetime import timezone, datetime
 from django import forms
 from django.contrib.auth.forms  import UserCreationForm, PasswordChangeForm
 from .models import User, Avatar
@@ -31,31 +32,43 @@ class BuscarProductoForm(forms.Form):
         return query
     
 
+
 class RegistroForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Contraseña a confirmar", widget=forms.PasswordInput)
-
-    class Meta:
-        model = User
-        fields = ["username", "email", "password1", "password2"]
-
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.set_password(self.cleaned_data['password'])
-        if commit:
-            user.save()
-        return user
-
-class UserEditForm(forms.ModelForm):
-    email = forms.EmailField(required=True)
-    nombre = forms.CharField(label="Nombre", max_length=50, required=True)
-    apellido = forms.CharField(label="Apellido", max_length=50, required=True)
+    first_name = forms.CharField(required=True, label="Nombre")
+    last_name = forms.CharField(required=True, label="Apellido")
     
     class Meta:
         model = User
-        fields = ["email", "nombre", "apellido"]
+        fields = ["username", "email", "first_name", "last_name", "password1", "password2"]
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Customize field labels if needed
+        self.fields['password1'].label = "Contraseña"
+        self.fields['password2'].label = "Confirmar Contraseña"
+    
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        if commit:
+            user.save()
+            # Create profile for the new user
+            from .models import Profile
+            Profile.objects.create(user=user)
+        return user
 
+
+class UserEditForm(forms.ModelForm):
+    first_name = forms.CharField(label="Nombre", max_length=50, required=True)
+    last_name = forms.CharField(label="Apellido", max_length=50, required=True)
+    email = forms.EmailField(required=True)
+    biografia = forms.CharField(widget=forms.Textarea, required=False)
+    fecha_nacimiento = forms.DateField(label="Fecha de Nacimiento", required=False, widget=forms.SelectDateWidget(years=range(1900, datetime.now().year+1)))
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'biografia', 'fecha_nacimiento']
 
 class AvatarForm(forms.Form):
     imagen = forms.ImageField(required=True)   
@@ -74,3 +87,10 @@ class PasswordCambioForm(PasswordChangeForm):
         super().__init__(*args, **kwargs)
         self.success_url = reverse_lazy('Taberna:password_exito')
 
+class ComentarioForm(forms.Form):
+    mensaje = forms.CharField(
+        widget=forms.Textarea,
+        label='Tu Comentario',
+        required=True,
+        max_length=1000
+    )

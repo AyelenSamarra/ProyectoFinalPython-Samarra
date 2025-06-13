@@ -7,8 +7,9 @@ app_name = 'Taberna'  # Add this for namespace
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('/<nombre>/<apellido>/', views.home, name='home'),
     path('about/', views.about, name='about'),
+    path('comentarios/', views.comentarios, name='comentarios'),
+    path('crear_comentario/', views.crear_comentario, name='crear_comentario'),
 
     #Taberneros
 
@@ -37,10 +38,11 @@ urlpatterns = [
     path('productos/delete/<int:pk>/', views.ProductoDeleteView.as_view(), name='producto_confirm_delete'),
     path('productos/buscar/', views.BuscarProductoView.as_view(), name='buscar_producto'),
 
-    # Login
+    # Perfil y Autenticación
     path('registro/', views.register, name="registro"),
     path('login/', views.login_request, name="login"),
     path('logout/', LogoutView.as_view(template_name='Taberna/logout.html'), name='logout'),
+    path('perfil/', views.perfil, name='perfil'),
     path('editar_perfil/', views.editar_perfil, name='editar_perfil'),
     path('agregar_avatar/', views.agregar_avatar, name="agregar_avatar"),
     path('password_cambio/', views.password_cambio, name='password_cambio'),

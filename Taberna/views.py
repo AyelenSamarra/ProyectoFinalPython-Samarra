@@ -3,6 +3,7 @@ from .models import *
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.conf import settings
+from datetime import datetime
 
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
@@ -14,16 +15,39 @@ from django.contrib.auth import update_session_auth_hash
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
-
 def home(request):
     context = {
         'MEDIA_URL': settings.MEDIA_URL,
     }
     return render(request, 'Taberna/home.html', context)
 
-
 def about(request):
     return render(request, 'Taberna/about.html')
+
+
+@login_required
+def comentarios(request):
+    comentarios_list = Comentario.objects.all().order_by('-fecha_creacion')
+    return render(request, 'Taberna/comentarios.html', {'comentarios': comentarios_list})
+
+@login_required
+def crear_comentario(request):
+    if request.method == "POST":
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            # Save the comment with the logged-in user's information
+            comentario = Comentario(
+                nombre=f"{request.user.nombre} {request.user.apellido}",
+                email=request.user.email,
+                mensaje=form.cleaned_data['mensaje']
+            )
+            comentario.save()
+            messages.success(request, 'Comentario enviado correctamente.')
+            return redirect('Taberna:comentarios')
+    else:
+        form = ComentarioForm()
+
+    return render(request, 'Taberna/crear_comentario.html', {'form': form})
 
 # -------------------------------------------------Taberneros-------------------------------------------------
 
@@ -159,55 +183,77 @@ class BuscarProductoView(ListView):
 
 def register(request):
     if request.method == "POST":
-        form = RegistroForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse_lazy('Taberna:home'))
+        try:
+            form = RegistroForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                login(request, user)
+                return redirect('Taberna:home')
+            else:
+                print("Form errors:", form.errors)  # Debug output
+        except Exception as e:
+            print("Registration error:", str(e))  # Debug output
+            raise  # Re-raise the error after logging it
     else:
         form = RegistroForm()
-
-    return render(request, "Taberna/registro.html", {"form": form})   
+    
+    return render(request, "Taberna/registro.html", {"form": form})
 
 def login_request(request):
     if request.method == "POST":
-        usuario = request.POST["username"]
-        clave = request.POST["password"]
-        user = authenticate(request, username=usuario, password=clave)
-        if user is not None:
-            login(request, user)
-            #Buscar Avatar
-            try:
-                avatar = Avatar.objects.get(user=request.user.id).imagen.url
-            except Avatar.DoesNotExist:
-                avatar = "/media/avatares/default.jpeg"
-            #finally:
-            #    request.session["avatar"] = avatar
-            #__            
-            return render(request, "Taberna/home.html")
-        else:
-            return redirect(reverse_lazy('Taberna:login'))
-    else:
-        form = AuthenticationForm()
-
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                # Handle avatar
+                try:
+                    avatar = Avatar.objects.get(user=user).imagen.url
+                except Avatar.DoesNotExist:
+                    avatar = "/media/avatares/default.jpeg"
+                request.session['avatar'] = avatar  # Store in session if needed
+                return redirect('Taberna:home')  # Use redirect instead of render
+        return render(request, "Taberna/login.html", {"form": form, "error": "Invalid credentials"})
+    
+    form = AuthenticationForm()
     return render(request, "Taberna/login.html", {"form": form})
 
 
 # ------------------------------------------------- Editar Perfil -------------------------------------------------
+@login_required
+def perfil(request):
+    usuario = request.user
+    try:
+        avatar = Avatar.objects.get(user=usuario.id).imagen.url
+    except Avatar.DoesNotExist:
+        avatar = "/media/avatares/default.jpeg"
+    
+    return render(request, "Taberna/perfil.html", {"usuario": usuario, "avatar": avatar})
+
 
 @login_required
 def editar_perfil(request):
-    usuario = request.user
     if request.method == "POST":
-        form = UserEditForm(request.POST)
+        form = UserEditForm(request.POST, instance=request.user)
         if form.is_valid():
-            user = User.objects.get(username=usuario)
-            user.email = form.cleaned_data.get("email")
-            user.nombre = form.cleaned_data.get("nombre")
-            user.apellido = form.cleaned_data.get("apellido")
-            user.save()
-            return redirect(reverse_lazy("Taberna:home"))
+            user = form.save(commit=False)
+            # Handle profile-specific fields
+            profile, created = Profile.objects.get_or_create(user=user)
+            profile.biografia = form.cleaned_data.get('biografia')
+            profile.fecha_nacimiento = form.cleaned_data.get('fecha_nacimiento')
+            profile.save()
+            
+            user.save()  # This saves the User model fields
+            return redirect('Taberna:perfil')  # Redirect to profile page
     else:
-        form = UserEditForm(instance=usuario)
+        initial_data = {
+            'biografia': request.user.profile.biografia,
+            'fecha_nacimiento': request.user.profile.fecha_nacimiento
+        }
+        form = UserEditForm(instance=request.user, initial=initial_data)
+    
     return render(request, "Taberna/editar_perfil.html", {"form": form})
 
 @login_required

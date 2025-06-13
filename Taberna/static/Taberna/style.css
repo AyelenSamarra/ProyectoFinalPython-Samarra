@@ -144,6 +144,10 @@ a.about {
     background-color: #d8ac79;
 }
 
+a.contacto {
+    background-color: #8b5e34;
+}
+
 /* Contenido */
 main {
     line-height: 1.7;

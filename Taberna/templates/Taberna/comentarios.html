@@ -1,0 +1,34 @@
+{% extends "Taberna/base.html" %}
+
+{% block title %}
+    Comentarios
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Comentarios</h1>
+    
+    <a href="{% url 'Taberna:crear_comentario' %}" class="btn btn-primary mb-4">Crear Nuevo Comentario</a>
+    
+    <h2 class="mb-3">Comentarios Recientes</h2>
+    
+    {% if comentarios %}
+        {% for comentario in comentarios %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ comentario.nombre }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ comentario.email }}</h6>
+                    <p class="card-text">{{ comentario.mensaje }}</p>
+                    <p class="card-text">
+                        <small class="text-muted">Publicado el {{ comentario.fecha_creacion|date:"d/m/Y H:i" }}</small>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info">No hay comentarios aún. ¡Sé el primero en comentar!</div>
+    {% endif %}
+    <div class="d-flex justify-content-center">
+        <a href="{% url 'Taberna:home' %}" class="btn btn-secondary">🏠 Volver al Inicio</a>
+</div>
+{% endblock %}
