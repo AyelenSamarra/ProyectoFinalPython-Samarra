@@ -58,7 +58,7 @@ class TaberneroListView(ListView):
 
 class TaberneroCreateView(LoginRequiredMixin, CreateView):
     model = Tabernero
-    fields = ["nombre", "apellido", "edad"]
+    fields = ["nombre", "apellido", "edad", "descripcion"]
     template_name = 'Taberna/crear_tabernero.html'
     success_url = reverse_lazy('Taberna:taberneros')
 

@@ -7,7 +7,19 @@
 
   <form method="post" class="bg-taberna text-white p-4 rounded shadow w-50 mx-auto">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+    <div class="mb-3">
+        <div class="form-group row">
+          <label for="{{ field.id_for_label }}" class="col-sm-4 col-form-label text-right">{{ field.label }}</label>
+          <div class="col-sm-8">
+            {{ field }}
+            {% if field.errors %}
+              <div class="text-danger mt-1">{{ field.errors }}</div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
 
     <div class="d-grid gap-2 mt-4">
       <button type="submit" class="btn btn-edicion fw-bold">➕ Actualizar Cliente Frecuente</button>
